@@ -57,6 +57,26 @@ void SystemClock_Config(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LCD_SPI SPI1
+#define USER_LED_Pin GPIO_PIN_13
+#define USER_LED_GPIO_Port GPIOC
+#define USER_KEY_Pin GPIO_PIN_0
+#define USER_KEY_GPIO_Port GPIOA
+#define LCD_CS_Pin GPIO_PIN_4
+#define LCD_CS_GPIO_Port GPIOA
+#define LCD_DCRS_Pin GPIO_PIN_0
+#define LCD_DCRS_GPIO_Port GPIOB
+#define LCD_RESET_Pin GPIO_PIN_1
+#define LCD_RESET_GPIO_Port GPIOB
+#define LCD_LED_Pin GPIO_PIN_2
+#define LCD_LED_GPIO_Port GPIOB
+#define NRF_IRQ_Pin GPIO_PIN_10
+#define NRF_IRQ_GPIO_Port GPIOB
+#define NRF_CS_Pin GPIO_PIN_12
+#define NRF_CS_GPIO_Port GPIOB
+#define SD_CS_Pin GPIO_PIN_5
+#define SD_CS_GPIO_Port GPIOB
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
