@@ -9,6 +9,8 @@
 #define INC_LOG_HPP_
 
 #include <cstring>
+#include <charconv>
+#include <mutex>
 
 namespace log
 {
@@ -27,7 +29,9 @@ namespace log
 		const char* log_var(const char* spec, int var)
 		{
 			char buf[16];
-			int n = sprintf(buf,"%d",var);
+			std::to_chars_result x = std::to_chars(buf, buf+16, var);
+			int n = x.ptr-buf;
+
 			log_part(buf, 0, n);
 			const char* fmt_end = spec;
 			while (*fmt_end != '\0')

@@ -74,6 +74,8 @@ void SystemClock_Config(void);
 #define NRF_IRQ_GPIO_Port GPIOB
 #define NRF_CS_Pin GPIO_PIN_12
 #define NRF_CS_GPIO_Port GPIOB
+#define NRF_CE_Pin GPIO_PIN_8
+#define NRF_CE_GPIO_Port GPIOA
 #define SD_CS_Pin GPIO_PIN_5
 #define SD_CS_GPIO_Port GPIOB
 
