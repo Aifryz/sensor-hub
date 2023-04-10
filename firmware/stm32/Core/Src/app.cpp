@@ -7,6 +7,8 @@
 
 #include "main.h"
 #include "usart.h"
+#include "spi.h"
+#include "gpio.h"
 #include <cstdio>
 
 #include "FreeRTOS.h"
@@ -22,6 +24,9 @@ extern "C" int main(void)
 
 	SystemClock_Config();
 	MX_USART2_UART_Init();
+	MX_GPIO_Init();
+	MX_SPI1_Init();
+	MX_SPI2_Init();
 	log::log("Hi?");
 	log::log("This is a number: {}", 3);
 	log::log("Bytes, rx {}, tx {}", 3, 5);

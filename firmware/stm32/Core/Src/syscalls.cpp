@@ -15,4 +15,5 @@
 extern "C" int _write(int file, char *ptr, int len)
 {
 	debug_uart.send(reinterpret_cast<const std::byte*>(ptr), len);
+	return len;
 }
