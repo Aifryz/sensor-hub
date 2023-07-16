@@ -5,7 +5,7 @@
  *      Author: robal
  */
 
-#include "drv/usart.hpp"
+#include <drv/usart.hpp>
 
 usart::usart(UART_HandleTypeDef* handle):
 	handle(handle),
