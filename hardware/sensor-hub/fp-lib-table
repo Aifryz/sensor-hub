@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "sensor-hub")(type "KiCad")(uri "C:/Users/robal/Documents/sensor-hub/hardware/sensor-hub.pretty")(options "")(descr ""))
+)
