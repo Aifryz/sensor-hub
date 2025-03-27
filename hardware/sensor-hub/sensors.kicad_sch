@@ -2,7 +2,7 @@
 	(version 20231120)
 	(generator "eeschema")
 	(generator_version "8.0")
-	(uuid "70b20424-1d60-4d09-b6aa-d810c920c820")
+	(uuid "9feb1746-e45f-4092-9fa9-d8e5321835e6")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:C_Small"
@@ -1768,7 +1768,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 152.4 82.55 0)
 			(effects
 				(font
@@ -2296,7 +2296,7 @@
 		(fields_autoplaced yes)
 		(uuid "56d6db89-6d41-4b36-8127-09d61e21846e")
 		(property "Reference" "JP5"
-			(at 107.95 118.1099 90)
+			(at 107.95 119.3799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2311,9 +2311,10 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm"
 			(at 110.49 119.38 0)
 			(effects
 				(font
@@ -2516,7 +2517,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 152.4 57.15 0)
 			(effects
 				(font
@@ -2824,7 +2825,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 158.75 111.76 0)
 			(effects
 				(font
