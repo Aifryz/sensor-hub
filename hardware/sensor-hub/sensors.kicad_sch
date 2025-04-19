@@ -592,49 +592,45 @@
 				)
 			)
 		)
-		(symbol "Sensor_Humidity:SHT4x"
+		(symbol "Sensor_Humidity:Si7021-A20"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at 0 8.89 0)
+				(at -5.08 7.62 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify right)
 				)
 			)
-			(property "Value" "SHT4x"
-				(at 0 6.35 0)
+			(property "Value" "Si7021-A20"
+				(at -10.16 10.16 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify right)
 				)
 			)
-			(property "Footprint" "Sensor_Humidity:Sensirion_DFN-4_1.5x1.5mm_P0.8mm_SHT4x_NoCentralPad"
-				(at 3.81 -6.35 0)
+			(property "Footprint" "Package_DFN_QFN:DFN-6-1EP_3x3mm_P1mm_EP1.5x2.4mm"
+				(at 0 -10.16 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://sensirion.com/media/documents/33FD6951/624C4357/Datasheet_SHT4x.pdf"
-				(at 3.81 -8.89 0)
+			(property "Datasheet" "https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf"
+				(at -5.08 7.62 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 					(hide yes)
 				)
 			)
-			(property "Description" "Digital Humidity and Temperature Sensor, ±1%RH, ±0.1°C, I2C, 1.08-3.6V, 16bit, DFN-4"
+			(property "Description" "I2C Humidity and Temperature Sensor, DFN-6"
 				(at 0 0 0)
 				(effects
 					(font
@@ -643,7 +639,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Sensirion environment environmental measurement digital SHT40 SHT41 SHT45"
+			(property "ki_keywords" "I2C Humidity Temperature Sensor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -652,7 +648,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "Sensirion?DFN*1.5x1.5mm*P0.8mm*SHT4x*"
+			(property "ki_fp_filters" "DFN*1EP*3x3mm*P1mm*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -661,10 +657,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "SHT4x_1_1"
+			(symbol "Si7021-A20_0_1"
 				(rectangle
-					(start -5.08 5.08)
-					(end 5.08 -5.08)
+					(start -10.16 5.08)
+					(end 10.16 -5.08)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -673,8 +669,10 @@
 						(type background)
 					)
 				)
+			)
+			(symbol "Si7021-A20_1_1"
 				(pin bidirectional line
-					(at -7.62 -2.54 0)
+					(at -12.7 2.54 0)
 					(length 2.54)
 					(name "SDA"
 						(effects
@@ -691,10 +689,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -7.62 2.54 0)
+				(pin power_in line
+					(at -2.54 -7.62 90)
 					(length 2.54)
-					(name "SCL"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -709,10 +707,10 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 2.54 7.62 270)
-					(length 2.54)
-					(name "VDD"
+				(pin no_connect line
+					(at 10.16 2.54 180)
+					(length 2.54) hide
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -727,10 +725,10 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 2.54 -7.62 90)
-					(length 2.54)
-					(name "VSS"
+				(pin no_connect line
+					(at 10.16 -2.54 180)
+					(length 2.54) hide
+					(name "NC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -738,6 +736,60 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -2.54 0)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -7.62 90)
+					(length 2.54)
+					(name "PAD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1281,6 +1333,12 @@
 		)
 	)
 	(junction
+		(at 158.75 78.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "016b9f34-14c2-4137-b67d-05070adf18c4")
+	)
+	(junction
 		(at 127 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1317,13 +1375,7 @@
 		(uuid "6010e17d-d9dd-4bc7-81a8-935712f76c98")
 	)
 	(junction
-		(at 152.4 78.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a7681146-ba37-47dc-adc1-7f3ecbc7b03c")
-	)
-	(junction
-		(at 152.4 53.34)
+		(at 158.75 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b0f8dd70-1285-451f-89a6-559c0542c157")
@@ -1338,6 +1390,10 @@
 		(at 130.81 129.54)
 		(uuid "8e657d5d-c6ec-4de3-8ac4-dcd114b9a259")
 	)
+	(no_connect
+		(at 146.05 95.25)
+		(uuid "93980242-5061-4c5e-a456-dcc35b4c0d2a")
+	)
 	(wire
 		(pts
 			(xy 148.59 107.95) (xy 158.75 107.95)
@@ -1350,7 +1406,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 53.34) (xy 152.4 54.61)
+			(xy 158.75 54.61) (xy 158.75 55.88)
 		)
 		(stroke
 			(width 0)
@@ -1400,16 +1456,6 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 54.61) (xy 140.97 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "13255347-0231-43f4-bc7e-32cc7f7eaf49")
-	)
-	(wire
-		(pts
 			(xy 130.81 124.46) (xy 120.65 124.46)
 		)
 		(stroke
@@ -1427,26 +1473,6 @@
 			(type default)
 		)
 		(uuid "15e9785d-14d7-41dc-8478-7af9483ced74")
-	)
-	(wire
-		(pts
-			(xy 140.97 80.01) (xy 140.97 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "18009bad-91f0-45f4-a815-c7c76000e56c")
-	)
-	(wire
-		(pts
-			(xy 152.4 78.74) (xy 152.4 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2510c88c-1848-4de0-9586-3c211f49a260")
 	)
 	(wire
 		(pts
@@ -1530,7 +1556,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 78.74) (xy 152.4 77.47)
+			(xy 158.75 77.47) (xy 158.75 78.74)
 		)
 		(stroke
 			(width 0)
@@ -1550,17 +1576,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 95.25) (xy 140.97 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78a87d7d-ec3c-4981-b6ec-40dca1c2f023")
-	)
-	(wire
-		(pts
-			(xy 152.4 52.07) (xy 152.4 53.34)
+			(xy 158.75 53.34) (xy 158.75 54.61)
 		)
 		(stroke
 			(width 0)
@@ -1580,7 +1596,17 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 53.34) (xy 152.4 53.34)
+			(xy 140.97 95.25) (xy 140.97 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a08d3111-1392-4591-9922-1739ab87aeae")
+	)
+	(wire
+		(pts
+			(xy 140.97 54.61) (xy 158.75 54.61)
 		)
 		(stroke
 			(width 0)
@@ -1610,6 +1636,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 80.01) (xy 143.51 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a468f209-b374-45fa-bc8c-2f37271e5551")
+	)
+	(wire
+		(pts
 			(xy 124.46 85.09) (xy 124.46 121.92)
 		)
 		(stroke
@@ -1620,7 +1656,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 85.09) (xy 152.4 86.36)
+			(xy 158.75 85.09) (xy 158.75 86.36)
 		)
 		(stroke
 			(width 0)
@@ -1650,7 +1686,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 59.69) (xy 152.4 60.96)
+			(xy 158.75 60.96) (xy 158.75 62.23)
 		)
 		(stroke
 			(width 0)
@@ -1670,6 +1706,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 78.74) (xy 158.75 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d5c423bd-a3c2-47f2-8c73-c760f237ba90")
+	)
+	(wire
+		(pts
 			(xy 110.49 113.03) (xy 110.49 114.3)
 		)
 		(stroke
@@ -1677,16 +1723,6 @@
 			(type default)
 		)
 		(uuid "d6d8468e-60bf-428f-a86e-70af6430b9b5")
-	)
-	(wire
-		(pts
-			(xy 140.97 78.74) (xy 152.4 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dc485c22-ecc9-409b-84e7-6963801bf8d3")
 	)
 	(wire
 		(pts
@@ -1718,6 +1754,16 @@
 		)
 		(uuid "e8a36435-78c9-4ed8-b4ad-579bc7e02efe")
 	)
+	(wire
+		(pts
+			(xy 158.75 78.74) (xy 158.75 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8149a63-9aa1-477a-bded-64aa056cfce8")
+	)
 	(hierarchical_label "SDA"
 		(shape bidirectional)
 		(at 114.3 59.69 180)
@@ -1742,7 +1788,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 152.4 82.55 0)
+		(at 158.75 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1751,7 +1797,7 @@
 		(fields_autoplaced yes)
 		(uuid "04fea5e0-3669-4161-bccc-d0e1a78b37f4")
 		(property "Reference" "C34"
-			(at 154.94 81.2862 0)
+			(at 161.29 81.2862 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1760,7 +1806,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 154.94 83.8262 0)
+			(at 161.29 83.8262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1769,7 +1815,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 152.4 82.55 0)
+			(at 158.75 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1778,7 +1824,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 152.4 82.55 0)
+			(at 158.75 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1787,7 +1833,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 152.4 82.55 0)
+			(at 158.75 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1812,7 +1858,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 152.4 77.47 0)
+		(at 158.75 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1820,7 +1866,7 @@
 		(dnp no)
 		(uuid "1aebb70f-0fab-4d2b-91e3-125749cc0179")
 		(property "Reference" "#PWR67"
-			(at 152.4 81.28 0)
+			(at 158.75 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1829,7 +1875,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 152.4 73.914 0)
+			(at 158.75 73.914 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1837,7 +1883,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 152.4 77.47 0)
+			(at 158.75 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1846,7 +1892,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 77.47 0)
+			(at 158.75 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1855,7 +1901,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 152.4 77.47 0)
+			(at 158.75 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1935,71 +1981,6 @@
 			(project ""
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/693cfc56-d7d6-435e-b734-e3f5535eee66"
 					(reference "#PWR63")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 140.97 96.52 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "24f76e9e-8ba1-4d8d-b6fa-6bc8a485ac7e")
-		(property "Reference" "#PWR64"
-			(at 140.97 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 144.272 98.552 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 140.97 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 140.97 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a851ae66-0ca0-4b85-8a1a-a2315df28a6f")
-		)
-		(instances
-			(project "sensor-hub"
-				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/693cfc56-d7d6-435e-b734-e3f5535eee66"
-					(reference "#PWR64")
 					(unit 1)
 				)
 			)
@@ -2157,7 +2138,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 152.4 60.96 0)
+		(at 158.75 62.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2165,7 +2146,7 @@
 		(dnp no)
 		(uuid "3d95418c-b753-474a-b74e-0375c5335b2b")
 		(property "Reference" "#PWR69"
-			(at 152.4 67.31 0)
+			(at 158.75 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2174,7 +2155,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 155.702 62.992 0)
+			(at 162.052 64.262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2182,7 +2163,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 152.4 60.96 0)
+			(at 158.75 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2191,7 +2172,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 60.96 0)
+			(at 158.75 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2200,7 +2181,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 152.4 60.96 0)
+			(at 158.75 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2426,7 +2407,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 152.4 86.36 0)
+		(at 158.75 86.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2434,7 +2415,7 @@
 		(dnp no)
 		(uuid "705f60d2-624b-4a3d-abd8-44e7c1d02c1a")
 		(property "Reference" "#PWR70"
-			(at 152.4 92.71 0)
+			(at 158.75 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2443,7 +2424,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 156.21 88.392 0)
+			(at 162.56 88.392 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2451,7 +2432,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 152.4 86.36 0)
+			(at 158.75 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2460,7 +2441,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 86.36 0)
+			(at 158.75 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2469,7 +2450,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 152.4 86.36 0)
+			(at 158.75 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2491,7 +2472,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 152.4 57.15 0)
+		(at 158.75 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2500,7 +2481,7 @@
 		(fields_autoplaced yes)
 		(uuid "71659e25-f144-403c-aaa8-5450a2531652")
 		(property "Reference" "C33"
-			(at 154.94 55.8862 0)
+			(at 161.29 57.1562 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2509,7 +2490,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 154.94 58.4262 0)
+			(at 161.29 59.6962 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2518,7 +2499,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 152.4 57.15 0)
+			(at 158.75 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2527,7 +2508,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 152.4 57.15 0)
+			(at 158.75 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2536,7 +2517,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 152.4 57.15 0)
+			(at 158.75 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2656,85 +2637,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Sensor_Humidity:SHT4x")
-		(at 138.43 87.63 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a664d670-1926-4493-9dc0-07eee7d646d7")
-		(property "Reference" "U6"
-			(at 133.096 81.534 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SHT4x"
-			(at 141.732 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Sensor_Humidity:Sensirion_DFN-4_1.5x1.5mm_P0.8mm_SHT4x_NoCentralPad"
-			(at 142.24 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://sensirion.com/media/documents/33FD6951/624C4357/Datasheet_SHT4x.pdf"
-			(at 142.24 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Digital Humidity and Temperature Sensor, ±1%RH, ±0.1°C, I2C, 1.08-3.6V, 16bit, DFN-4"
-			(at 138.43 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "dce8d440-f9c4-4354-ac8c-c381cb6a354a")
-		)
-		(pin "4"
-			(uuid "0315cec9-125d-43b1-9087-d691e7fbe24b")
-		)
-		(pin "3"
-			(uuid "f255f0fb-ec79-4d48-bb5c-99d9f435f7aa")
-		)
-		(pin "1"
-			(uuid "4ad7df52-03ed-4d24-a0cf-db99cb4db255")
-		)
-		(instances
-			(project ""
-				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/693cfc56-d7d6-435e-b734-e3f5535eee66"
-					(reference "U6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3V")
-		(at 152.4 52.07 0)
+		(at 158.75 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2742,7 +2646,7 @@
 		(dnp no)
 		(uuid "c6a90634-8f78-435b-8a30-a1b21dfbf60a")
 		(property "Reference" "#PWR66"
-			(at 152.4 55.88 0)
+			(at 158.75 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2751,7 +2655,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 152.4 48.26 0)
+			(at 158.75 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2759,7 +2663,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 152.4 52.07 0)
+			(at 158.75 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2768,7 +2672,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 52.07 0)
+			(at 158.75 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2777,7 +2681,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 152.4 52.07 0)
+			(at 158.75 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2934,6 +2838,71 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 140.97 97.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "de116055-6dc6-4d12-acd1-9193bd56a9d8")
+		(property "Reference" "#PWR89"
+			(at 140.97 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 144.78 99.822 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 140.97 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 140.97 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a985ec47-0ae8-4af8-a798-1d727b30ef4f")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/693cfc56-d7d6-435e-b734-e3f5535eee66"
+					(reference "#PWR89")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 110.49 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2992,6 +2961,90 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/693cfc56-d7d6-435e-b734-e3f5535eee66"
 					(reference "#PWR72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Humidity:Si7021-A20")
+		(at 143.51 87.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fe2b1d64-4a2a-4b4e-9048-c4f55fe5f367")
+		(property "Reference" "U8"
+			(at 133.096 81.534 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Si7021-A20"
+			(at 147.32 94.234 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_DFN_QFN:DFN-6-1EP_3x3mm_P1mm_EP1.5x2.4mm"
+			(at 143.51 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf"
+			(at 138.43 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "I2C Humidity and Temperature Sensor, DFN-6"
+			(at 143.51 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "642150e8-728b-4dc6-ad12-34d36b6c5d19")
+		)
+		(pin "2"
+			(uuid "2fd65927-db02-475e-ba62-6c6c33ad4faf")
+		)
+		(pin "1"
+			(uuid "75ca4243-66b0-4312-897d-15dfec7029c6")
+		)
+		(pin "6"
+			(uuid "c735d855-a56b-47bf-b6a8-ed041d1d55c8")
+		)
+		(pin "3"
+			(uuid "1ecea28f-38e4-4e85-8e9e-f09fd11321be")
+		)
+		(pin "4"
+			(uuid "70295347-e372-4292-9359-bcd94950b1ff")
+		)
+		(pin "5"
+			(uuid "ef436232-bf21-4759-a907-cc79581230a9")
+		)
+		(instances
+			(project ""
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/693cfc56-d7d6-435e-b734-e3f5535eee66"
+					(reference "U8")
 					(unit 1)
 				)
 			)
