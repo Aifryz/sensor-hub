@@ -4465,6 +4465,16 @@
 	)
 	(wire
 		(pts
+			(xy 271.78 67.31) (xy 266.7 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "568f3581-78ce-47f3-8f99-cb7a60dddae5")
+	)
+	(wire
+		(pts
 			(xy 165.1 59.69) (xy 215.9 59.69)
 		)
 		(stroke
@@ -5025,6 +5035,16 @@
 	)
 	(wire
 		(pts
+			(xy 271.78 57.15) (xy 266.7 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc68c61e-5120-4f18-af93-9c7f68283110")
+	)
+	(wire
+		(pts
 			(xy 142.24 49.53) (xy 140.97 49.53)
 		)
 		(stroke
@@ -5393,8 +5413,18 @@
 		)
 		(uuid "8420b6b6-03a9-4e6a-887b-165e818d542a")
 	)
+	(label "ETH_RXP"
+		(at 196.85 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05377b2a-b99d-4626-8827-c8d0111085a5")
+	)
 	(label "LINK_LED"
-		(at 261.62 57.15 0)
+		(at 271.78 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5402,6 +5432,16 @@
 			(justify left bottom)
 		)
 		(uuid "16f5e8fb-6a28-4b4b-847d-82ffc92bae57")
+	)
+	(label "ETH_RXN"
+		(at 196.85 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "38a4beeb-d217-4171-ac66-4d7d525d9eab")
 	)
 	(label "ACT_LED"
 		(at 156.21 93.98 0)
@@ -5413,8 +5453,18 @@
 		)
 		(uuid "583c1890-04fe-428c-ae15-9bd292e2d657")
 	)
+	(label "ETH_TXN"
+		(at 186.69 59.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6a8d0aec-e000-405e-9313-8817c53c427e")
+	)
 	(label "ACT_LED"
-		(at 261.62 67.31 0)
+		(at 271.78 67.31 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5432,6 +5482,36 @@
 			(justify left bottom)
 		)
 		(uuid "9054dadd-4c47-4263-8f78-9253745f42de")
+	)
+	(label "RXN"
+		(at 167.64 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9278027c-3adb-4f1d-a952-471013e726a0")
+	)
+	(label "ETH_TXP"
+		(at 186.69 54.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ba3df92-0318-49bc-8943-8e8b79ebfe72")
+	)
+	(label "RXP"
+		(at 167.64 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d272fd01-de56-42c9-ab11-83c9f8683b2e")
 	)
 	(hierarchical_label "ETH_NRST"
 		(shape input)
@@ -6919,72 +6999,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 128.27 24.13 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "439ffd72-3c7e-4cef-abd6-27e64753bba1")
-		(property "Reference" "#PWR24"
-			(at 128.27 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 128.27 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 128.27 24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 128.27 24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 128.27 24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7b6a18a6-3d2c-48a1-9df8-b3e1488a9916")
-		)
-		(instances
-			(project "sensor-hub"
-				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
-					(reference "#PWR24")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Small")
 		(at 270.51 48.26 180)
 		(unit 1)
@@ -7326,6 +7340,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_Small")
+		(at 264.16 67.31 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5a2b6706-e1d9-489e-89f6-3b5edcbb36fd")
+		(property "Reference" "R37"
+			(at 264.16 69.088 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 264.16 70.866 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 264.16 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 264.16 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 264.16 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "32e82069-827b-4bcd-b44e-5f36bf6d988c")
+		)
+		(pin "2"
+			(uuid "8e957a20-0454-4177-b0e0-c6d4629800b0")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
+					(reference "R37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 208.28 83.82 0)
 		(unit 1)
@@ -7390,6 +7471,73 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
 					(reference "C6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small")
+		(at 264.16 57.15 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5d742dbc-939a-40d0-9331-78a26aafbcc6")
+		(property "Reference" "R36"
+			(at 264.16 58.928 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 264.16 60.706 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 264.16 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 264.16 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 264.16 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b6549a9d-743a-4e82-bfd6-996ada6efd7d")
+		)
+		(pin "2"
+			(uuid "2069835c-215a-4f6d-b05f-33c52256a4d9")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
+					(reference "R36")
 					(unit 1)
 				)
 			)
@@ -8214,16 +8362,16 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 90.17 22.86 0)
+		(at 55.88 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "9c3464b1-8735-46fc-8109-072af2fda4f8")
-		(property "Reference" "#PWR29"
-			(at 90.17 26.67 0)
+		(uuid "9afe19e1-1287-46d8-9717-b15087ad9652")
+		(property "Reference" "#PWR31"
+			(at 55.88 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8232,7 +8380,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 90.17 17.78 0)
+			(at 55.88 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8240,7 +8388,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 90.17 22.86 0)
+			(at 55.88 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8249,7 +8397,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 90.17 22.86 0)
+			(at 55.88 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8258,7 +8406,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 90.17 22.86 0)
+			(at 55.88 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8267,12 +8415,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "544d37e0-32d9-4790-9c6c-f4d8878e092c")
+			(uuid "310c4610-61db-46ba-a8f6-2dffd5f7be39")
 		)
 		(instances
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
-					(reference "#PWR29")
+					(reference "#PWR31")
 					(unit 1)
 				)
 			)
@@ -8544,6 +8692,72 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
 					(reference "#PWR1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 90.17 22.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ac931c48-d2b4-4545-9c8e-a4efeff95790")
+		(property "Reference" "#PWR29"
+			(at 90.17 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 90.17 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.17 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 90.17 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e51b1515-08dd-4dd5-bb64-cdc912d35149")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
+					(reference "#PWR29")
 					(unit 1)
 				)
 			)
@@ -9440,16 +9654,16 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 55.88 49.53 0)
+		(at 128.27 24.13 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ded8436e-ed98-404f-8c4f-9599ea97c0c3")
-		(property "Reference" "#PWR31"
-			(at 55.88 53.34 0)
+		(uuid "dcc1513b-6919-46e6-9160-b0ec2290dc3e")
+		(property "Reference" "#PWR24"
+			(at 128.27 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9458,7 +9672,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 55.88 44.45 0)
+			(at 128.27 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9466,7 +9680,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 55.88 49.53 0)
+			(at 128.27 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9475,7 +9689,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 49.53 0)
+			(at 128.27 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9484,7 +9698,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 55.88 49.53 0)
+			(at 128.27 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9493,12 +9707,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "bb1526fd-9734-4d22-88b9-a52e27d5b5af")
+			(uuid "850cf860-2f6a-4910-9f87-184bae0c636a")
 		)
 		(instances
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/044ed54a-4c55-4753-9c23-068a82783f4a"
-					(reference "#PWR31")
+					(reference "#PWR24")
 					(unit 1)
 				)
 			)
