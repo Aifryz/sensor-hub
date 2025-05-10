@@ -5524,6 +5524,16 @@
 	)
 	(wire
 		(pts
+			(xy 208.28 125.73) (xy 210.82 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2936dea1-08eb-4db3-8f45-8b94ae917e28")
+	)
+	(wire
+		(pts
 			(xy 248.92 118.11) (xy 248.92 132.08)
 		)
 		(stroke
@@ -5654,7 +5664,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 148.59) (xy 227.33 149.86)
+			(xy 227.33 151.13) (xy 227.33 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5874,7 +5884,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 125.73) (xy 232.41 125.73)
+			(xy 208.28 128.27) (xy 232.41 128.27)
 		)
 		(stroke
 			(width 0)
@@ -5924,17 +5934,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 133.35) (xy 210.82 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "511b1d6b-230a-482b-9430-e9b7efbd10d2")
-	)
-	(wire
-		(pts
-			(xy 227.33 128.27) (xy 227.33 133.35)
+			(xy 227.33 130.81) (xy 227.33 135.89)
 		)
 		(stroke
 			(width 0)
@@ -6204,7 +6204,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 128.27) (xy 227.33 128.27)
+			(xy 208.28 130.81) (xy 227.33 130.81)
 		)
 		(stroke
 			(width 0)
@@ -6344,7 +6344,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 125.73) (xy 232.41 133.35)
+			(xy 232.41 128.27) (xy 232.41 135.89)
 		)
 		(stroke
 			(width 0)
@@ -7114,7 +7114,7 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 133.35) (xy 222.25 130.81)
+			(xy 222.25 135.89) (xy 222.25 133.35)
 		)
 		(stroke
 			(width 0)
@@ -7494,7 +7494,7 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 130.81) (xy 208.28 130.81)
+			(xy 222.25 133.35) (xy 208.28 133.35)
 		)
 		(stroke
 			(width 0)
@@ -7785,7 +7785,7 @@
 		(uuid "cbb6ec6d-3496-4e0e-8bc4-e116d05e5d1c")
 	)
 	(label "CARD_DET"
-		(at 210.82 133.35 0)
+		(at 210.82 125.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10927,7 +10927,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 227.33 135.89 0)
+		(at 227.33 138.43 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10935,7 +10935,7 @@
 		(dnp no)
 		(uuid "7a1dbe0c-b456-4f97-b86f-f6ac228aec0d")
 		(property "Reference" "R22"
-			(at 229.108 137.922 90)
+			(at 229.108 140.462 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10944,7 +10944,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 225.552 137.922 90)
+			(at 225.552 140.462 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10953,7 +10953,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 227.33 135.89 0)
+			(at 227.33 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10962,7 +10962,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 227.33 135.89 0)
+			(at 227.33 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10971,7 +10971,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 227.33 135.89 0)
+			(at 227.33 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12305,7 +12305,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 227.33 149.86 0)
+		(at 227.33 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12314,7 +12314,7 @@
 		(fields_autoplaced yes)
 		(uuid "caa5412e-c74d-4974-be8f-e3de058ff469")
 		(property "Reference" "#PWR54"
-			(at 227.33 156.21 0)
+			(at 227.33 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12323,7 +12323,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 227.33 154.94 0)
+			(at 227.33 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12331,7 +12331,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 227.33 149.86 0)
+			(at 227.33 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12340,7 +12340,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 149.86 0)
+			(at 227.33 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12349,7 +12349,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 227.33 149.86 0)
+			(at 227.33 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12640,7 +12640,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 222.25 135.89 0)
+		(at 222.25 138.43 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12648,7 +12648,7 @@
 		(dnp no)
 		(uuid "da2aa4aa-e1cf-43fd-93bf-32ea26219447")
 		(property "Reference" "R23"
-			(at 224.028 137.922 90)
+			(at 224.028 140.462 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12657,7 +12657,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 220.472 137.922 90)
+			(at 220.472 140.462 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12666,7 +12666,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 222.25 135.89 0)
+			(at 222.25 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12675,7 +12675,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 222.25 135.89 0)
+			(at 222.25 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12684,7 +12684,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 222.25 135.89 0)
+			(at 222.25 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13150,7 +13150,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED_BGKR")
-		(at 227.33 143.51 90)
+		(at 227.33 146.05 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13158,7 +13158,7 @@
 		(dnp no)
 		(uuid "e52b0c41-b40c-4f90-a914-b14b6604ed89")
 		(property "Reference" "D1"
-			(at 216.154 141.478 90)
+			(at 216.154 144.018 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13167,7 +13167,7 @@
 			)
 		)
 		(property "Value" "LED_BGKR"
-			(at 209.042 145.542 90)
+			(at 209.042 148.082 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13176,7 +13176,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_Cree-PLCC4_3.2x2.8mm_CCW"
-			(at 228.6 143.51 0)
+			(at 228.6 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13185,7 +13185,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 143.51 0)
+			(at 228.6 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13194,7 +13194,7 @@
 			)
 		)
 		(property "Description" "RGB LED, blue/green/cathode/red"
-			(at 227.33 143.51 0)
+			(at 227.33 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13690,7 +13690,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 232.41 135.89 0)
+		(at 232.41 138.43 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13698,7 +13698,7 @@
 		(dnp no)
 		(uuid "f63b3791-777f-4d67-adb5-f45a54a6964a")
 		(property "Reference" "R21"
-			(at 234.188 137.922 90)
+			(at 234.188 140.462 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13707,7 +13707,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 230.632 137.922 90)
+			(at 230.632 140.462 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13716,7 +13716,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 232.41 135.89 0)
+			(at 232.41 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13725,7 +13725,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 232.41 135.89 0)
+			(at 232.41 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13734,7 +13734,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 232.41 135.89 0)
+			(at 232.41 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
