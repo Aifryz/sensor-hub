@@ -1821,6 +1821,26 @@
 		)
 		(uuid "f261323b-4b7f-45ca-b039-9beb1e3fe6df")
 	)
+	(label "3.3V_P0"
+		(at 111.76 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0cda7974-3161-49e0-8d55-3ffa281c3019")
+	)
+	(label "LX"
+		(at 90.17 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f0323410-0a33-489f-8bcf-5c3c0cebb024")
+	)
 	(symbol
 		(lib_id "power:GND")
 		(at 35.56 54.61 0)
