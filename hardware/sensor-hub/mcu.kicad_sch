@@ -1593,7 +1593,7 @@
 				)
 			)
 		)
-		(symbol "Device:LED_BGKR"
+		(symbol "Device:LED_BGRA"
 			(pin_names
 				(offset 0) hide)
 			(exclude_from_sim no)
@@ -1607,7 +1607,7 @@
 					)
 				)
 			)
-			(property "Value" "LED_BGKR"
+			(property "Value" "LED_BGRA"
 				(at 0 -8.89 0)
 				(effects
 					(font
@@ -1633,7 +1633,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "RGB LED, blue/green/cathode/red"
+			(property "Description" "RGB LED, blue/green/red/anode"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1660,9 +1660,9 @@
 					(hide yes)
 				)
 			)
-			(symbol "LED_BGKR_0_0"
+			(symbol "LED_BGRA_0_0"
 				(text "B"
-					(at 1.905 -6.35 0)
+					(at -1.905 -6.35 0)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1670,7 +1670,7 @@
 					)
 				)
 				(text "G"
-					(at 1.905 -1.27 0)
+					(at -1.905 -1.27 0)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1678,7 +1678,7 @@
 					)
 				)
 				(text "R"
-					(at 1.905 3.81 0)
+					(at -1.905 3.81 0)
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1686,16 +1686,17 @@
 					)
 				)
 			)
-			(symbol "LED_BGKR_0_1"
-				(circle
-					(center -2.032 0)
-					(radius 0.254)
+			(symbol "LED_BGRA_0_1"
+				(polyline
+					(pts
+						(xy -1.27 -5.08) (xy -2.54 -5.08)
+					)
 					(stroke
 						(width 0)
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(polyline
@@ -1748,6 +1749,18 @@
 				)
 				(polyline
 					(pts
+						(xy -1.27 5.08) (xy -2.54 5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
 						(xy -1.27 5.08) (xy 1.27 5.08)
 					)
 					(stroke
@@ -1772,18 +1785,6 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -5.08) (xy 2.54 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 1.27 0) (xy -1.27 0)
 					)
 					(stroke
@@ -1797,18 +1798,6 @@
 				(polyline
 					(pts
 						(xy 1.27 0) (xy 2.54 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 5.08) (xy 2.54 5.08)
 					)
 					(stroke
 						(width 0)
@@ -1844,7 +1833,7 @@
 				)
 				(polyline
 					(pts
-						(xy -1.27 5.08) (xy -2.032 5.08) (xy -2.032 -5.08) (xy -1.016 -5.08)
+						(xy 1.27 -5.08) (xy 2.032 -5.08) (xy 2.032 5.08) (xy 1.27 5.08)
 					)
 					(stroke
 						(width 0)
@@ -2006,6 +1995,17 @@
 						(type none)
 					)
 				)
+				(circle
+					(center 2.032 0)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(rectangle
 					(start 2.794 8.382)
 					(end -2.794 -7.62)
@@ -2018,11 +2018,11 @@
 					)
 				)
 			)
-			(symbol "LED_BGKR_1_1"
+			(symbol "LED_BGRA_1_1"
 				(pin passive line
-					(at 5.08 -5.08 180)
+					(at -5.08 -5.08 0)
 					(length 2.54)
-					(name "BA"
+					(name "BK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2038,9 +2038,9 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 0 180)
+					(at -5.08 0 0)
 					(length 2.54)
-					(name "GA"
+					(name "GK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2056,9 +2056,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 0 0)
+					(at -5.08 5.08 0)
 					(length 2.54)
-					(name "K"
+					(name "RK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2074,9 +2074,9 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 5.08 180)
+					(at 5.08 0 180)
 					(length 2.54)
-					(name "RA"
+					(name "A"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5434,6 +5434,16 @@
 	)
 	(wire
 		(pts
+			(xy 227.33 153.67) (xy 207.01 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ccf1f67-3fe0-4443-9ca3-6503c396b997")
+	)
+	(wire
+		(pts
 			(xy 60.96 55.88) (xy 59.69 55.88)
 		)
 		(stroke
@@ -5664,7 +5674,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 151.13) (xy 227.33 152.4)
+			(xy 227.33 151.13) (xy 227.33 153.67)
 		)
 		(stroke
 			(width 0)
@@ -7441,6 +7451,16 @@
 			(type default)
 		)
 		(uuid "f71e6dc2-f3b3-47ff-9e0e-56bfc20a7063")
+	)
+	(wire
+		(pts
+			(xy 207.01 153.67) (xy 207.01 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f73560b2-0c35-487b-8df7-f15e29ea1701")
 	)
 	(wire
 		(pts
@@ -10651,6 +10671,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED_BGRA")
+		(at 227.33 146.05 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "713ef76f-4d28-4ee4-8e2c-4937ca8f7b72")
+		(property "Reference" "D1"
+			(at 216.916 144.018 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LED_BGRA"
+			(at 209.804 148.082 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_Cree-PLCC4_3.2x2.8mm_CCW"
+			(at 226.06 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 226.06 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED, blue/green/red/anode"
+			(at 227.33 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2b81f85c-239b-48a6-8fb2-6e151c0e14e4")
+		)
+		(pin "2"
+			(uuid "13dae0bf-0d30-4338-b4c1-24dd2ac48f75")
+		)
+		(pin "4"
+			(uuid "134b4bcc-f189-4c32-a99c-5327514bddd3")
+		)
+		(pin "3"
+			(uuid "47888467-f590-4053-8359-fd6885cf3d5a")
+		)
+		(instances
+			(project ""
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/acb07f68-122e-4e37-938b-04e6ced67923"
+					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 170.18 27.94 0)
 		(unit 1)
@@ -12304,72 +12399,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 227.33 152.4 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "caa5412e-c74d-4974-be8f-e3de058ff469")
-		(property "Reference" "#PWR54"
-			(at 227.33 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 227.33 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 227.33 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 227.33 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 227.33 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a1a8aa98-266d-4b0c-9f12-da387e03fa53")
-		)
-		(instances
-			(project "sensor-hub"
-				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/acb07f68-122e-4e37-938b-04e6ced67923"
-					(reference "#PWR54")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Small")
 		(at 198.12 40.64 0)
 		(unit 1)
@@ -12433,6 +12462,72 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/acb07f68-122e-4e37-938b-04e6ced67923"
 					(reference "R17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 207.01 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cde7bf1a-d2f3-4684-a577-b412b5d13180")
+		(property "Reference" "#PWR54"
+			(at 207.01 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 207.01 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 207.01 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 207.01 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 207.01 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e16dab02-6d49-4c4a-8c22-4c56bc80c157")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/acb07f68-122e-4e37-938b-04e6ced67923"
+					(reference "#PWR54")
 					(unit 1)
 				)
 			)
@@ -13143,81 +13238,6 @@
 			(project ""
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/acb07f68-122e-4e37-938b-04e6ced67923"
 					(reference "J2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED_BGKR")
-		(at 227.33 146.05 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e52b0c41-b40c-4f90-a914-b14b6604ed89")
-		(property "Reference" "D1"
-			(at 216.154 144.018 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "LED_BGKR"
-			(at 209.042 148.082 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_Cree-PLCC4_3.2x2.8mm_CCW"
-			(at 228.6 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 228.6 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "RGB LED, blue/green/cathode/red"
-			(at 227.33 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0a8cbe24-e113-40ac-8bb3-b1fe85403770")
-		)
-		(pin "4"
-			(uuid "3f147d9e-ea35-429c-83dc-e792ed51fbcd")
-		)
-		(pin "2"
-			(uuid "c0dd86fb-12ef-40f5-a2c4-d365ae47f70b")
-		)
-		(pin "3"
-			(uuid "59ea73f7-4b70-412b-aeb4-ce6b28f25977")
-		)
-		(instances
-			(project ""
-				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/acb07f68-122e-4e37-938b-04e6ced67923"
-					(reference "D1")
 					(unit 1)
 				)
 			)
