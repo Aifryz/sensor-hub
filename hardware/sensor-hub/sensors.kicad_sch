@@ -1339,22 +1339,22 @@
 		(uuid "016b9f34-14c2-4137-b67d-05070adf18c4")
 	)
 	(junction
+		(at 127 85.09)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "15a95c56-3b57-4b34-bd33-4de3ce39923e")
+	)
+	(junction
 		(at 127 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "19217139-83dd-414e-861c-f5e054c46947")
 	)
 	(junction
-		(at 127 90.17)
+		(at 124.46 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "25a05d2e-58b0-4ece-8dfd-6051cd75d935")
-	)
-	(junction
-		(at 124.46 85.09)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4b23317d-82fb-486a-8520-a5472bfc3836")
+		(uuid "33cc08a5-f228-47ae-8985-e59b7ee0f8c5")
 	)
 	(junction
 		(at 110.49 114.3)
@@ -1426,13 +1426,13 @@
 	)
 	(wire
 		(pts
-			(xy 127 90.17) (xy 130.81 90.17)
+			(xy 127 85.09) (xy 130.81 85.09)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0bd21846-c63d-4e3f-ba42-fc1f43d43369")
+		(uuid "0ab1c258-1c7c-4668-a82f-1dc2cd98b965")
 	)
 	(wire
 		(pts
@@ -1476,6 +1476,16 @@
 	)
 	(wire
 		(pts
+			(xy 127 85.09) (xy 127 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22ac2b3c-b44c-438f-9564-dd8ba9b03dab")
+	)
+	(wire
+		(pts
 			(xy 110.49 124.46) (xy 110.49 125.73)
 		)
 		(stroke
@@ -1516,7 +1526,17 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 62.23) (xy 124.46 85.09)
+			(xy 124.46 90.17) (xy 124.46 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d21a6fc-90d0-4bf3-84b8-464c83353046")
+	)
+	(wire
+		(pts
+			(xy 124.46 62.23) (xy 124.46 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1533,16 +1553,6 @@
 			(type default)
 		)
 		(uuid "53f17473-ba0f-40c6-9c82-dfb262b34369")
-	)
-	(wire
-		(pts
-			(xy 124.46 85.09) (xy 130.81 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5be210b0-5b62-45bd-9e57-eb2bebe96b83")
 	)
 	(wire
 		(pts
@@ -1616,16 +1626,6 @@
 	)
 	(wire
 		(pts
-			(xy 127 90.17) (xy 127 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a21776e1-7b4f-4695-819a-c9f1aa3d7582")
-	)
-	(wire
-		(pts
 			(xy 158.75 114.3) (xy 158.75 115.57)
 		)
 		(stroke
@@ -1643,16 +1643,6 @@
 			(type default)
 		)
 		(uuid "a468f209-b374-45fa-bc8c-2f37271e5551")
-	)
-	(wire
-		(pts
-			(xy 124.46 85.09) (xy 124.46 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a97b0526-8992-4015-a97f-a9814bf98627")
 	)
 	(wire
 		(pts
@@ -1686,6 +1676,16 @@
 	)
 	(wire
 		(pts
+			(xy 124.46 90.17) (xy 130.81 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4c9bd77-da6d-4b99-a2bd-15e276b4a93d")
+	)
+	(wire
+		(pts
 			(xy 158.75 60.96) (xy 158.75 62.23)
 		)
 		(stroke
@@ -1696,7 +1696,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 59.69) (xy 127 90.17)
+			(xy 127 59.69) (xy 127 85.09)
 		)
 		(stroke
 			(width 0)
@@ -1874,7 +1874,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
+		(property "Value" "+3.3V_LDO"
 			(at 158.75 73.914 0)
 			(effects
 				(font
@@ -2089,7 +2089,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
+		(property "Value" "+3.3V_LDO"
 			(at 158.75 102.87 0)
 			(effects
 				(font
@@ -2219,7 +2219,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
+		(property "Value" "+3.3V_LDO"
 			(at 110.49 109.22 0)
 			(effects
 				(font
@@ -2654,7 +2654,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
+		(property "Value" "+3.3V_LDO"
 			(at 158.75 49.53 0)
 			(effects
 				(font

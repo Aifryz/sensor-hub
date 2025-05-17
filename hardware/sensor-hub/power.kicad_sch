@@ -727,6 +727,142 @@
 				)
 			)
 		)
+		(symbol "Regulator_Linear:AMS1117-3.3"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -3.81 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "AMS1117-3.3"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf"
+				(at 2.54 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "linear regulator ldo fixed positive"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?223*TabPin2*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "AMS1117-3.3_0_1"
+				(rectangle
+					(start -5.08 -5.08)
+					(end 5.08 1.905)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "AMS1117-3.3_1_1"
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "VO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "VI"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Regulator_Switching:AP3402"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1362,6 +1498,12 @@
 		(uuid "221edc69-738d-4b40-b98b-85832767f8ae")
 	)
 	(junction
+		(at 119.38 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "316f8991-3d60-4808-a3d0-a273a42de31f")
+	)
+	(junction
 		(at 54.61 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1416,10 +1558,34 @@
 		(uuid "95069af8-3239-4551-987e-924651debdac")
 	)
 	(junction
+		(at 60.96 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a8cc76da-0933-4b37-929e-3fbd059359e2")
+	)
+	(junction
 		(at 109.22 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a9e3bf53-aecd-40b3-9ee2-9f1d6f7e922a")
+	)
+	(junction
+		(at 100.33 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bca14262-4d16-454d-a4fd-79f10542f8cd")
+	)
+	(junction
+		(at 91.44 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bd8daade-aa4a-4d37-832b-fee289c8ab0b")
+	)
+	(junction
+		(at 109.22 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ce57a9f8-48e1-4ed4-bd9c-28bcbe220359")
 	)
 	(junction
 		(at 120.65 50.8)
@@ -1440,6 +1606,16 @@
 			(type default)
 		)
 		(uuid "0b86ef93-0e92-4bd0-a45b-52967a4b5adb")
+	)
+	(wire
+		(pts
+			(xy 119.38 90.17) (xy 121.92 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0e85d6fd-72eb-484d-b817-5ce4ed3aa6c5")
 	)
 	(wire
 		(pts
@@ -1470,6 +1646,16 @@
 			(type default)
 		)
 		(uuid "15a7132f-45dd-40ee-a517-d1e9fc1de6b1")
+	)
+	(wire
+		(pts
+			(xy 60.96 90.17) (xy 69.85 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19af95d2-b111-404a-918f-5962a11779be")
 	)
 	(wire
 		(pts
@@ -1543,6 +1729,26 @@
 	)
 	(wire
 		(pts
+			(xy 60.96 95.25) (xy 60.96 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3681022d-cf57-417e-a010-cd5dd83553b4")
+	)
+	(wire
+		(pts
+			(xy 77.47 97.79) (xy 77.47 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37c2b7f6-8cec-45ca-8c35-033f60d694fe")
+	)
+	(wire
+		(pts
 			(xy 100.33 58.42) (xy 109.22 58.42)
 		)
 		(stroke
@@ -1550,6 +1756,26 @@
 			(type default)
 		)
 		(uuid "37e938d2-990d-43b2-8ece-d93664dfac8b")
+	)
+	(wire
+		(pts
+			(xy 100.33 95.25) (xy 100.33 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38033a1b-da31-4580-acbc-a70bb98e0926")
+	)
+	(wire
+		(pts
+			(xy 85.09 90.17) (xy 91.44 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3cc21e54-f2ef-471e-96b1-e505bfe8ff96")
 	)
 	(wire
 		(pts
@@ -1643,6 +1869,16 @@
 	)
 	(wire
 		(pts
+			(xy 109.22 104.14) (xy 109.22 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75178d6a-d98d-46da-99fc-c6f1f7320534")
+	)
+	(wire
+		(pts
 			(xy 109.22 57.15) (xy 109.22 58.42)
 		)
 		(stroke
@@ -1650,6 +1886,16 @@
 			(type default)
 		)
 		(uuid "755da89e-7034-420e-95e5-64325637dc4b")
+	)
+	(wire
+		(pts
+			(xy 91.44 90.17) (xy 100.33 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "778d831b-2196-45de-86d1-fce43aeb9fb9")
 	)
 	(wire
 		(pts
@@ -1670,6 +1916,26 @@
 			(type default)
 		)
 		(uuid "851c7fe1-8d56-427c-ac92-073e23c6399d")
+	)
+	(wire
+		(pts
+			(xy 38.1 90.17) (xy 38.1 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86625f63-554d-475a-8c1a-f1e74c47b4be")
+	)
+	(wire
+		(pts
+			(xy 109.22 90.17) (xy 119.38 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "934f3ef3-da58-435e-9f3c-50605149e464")
 	)
 	(wire
 		(pts
@@ -1720,6 +1986,16 @@
 			(type default)
 		)
 		(uuid "aed3a2be-3d18-4a18-b989-51cc9bd32b7c")
+	)
+	(wire
+		(pts
+			(xy 60.96 90.17) (xy 38.1 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b82caa86-a951-4688-9a0a-5086c9006312")
 	)
 	(wire
 		(pts
@@ -1793,6 +2069,26 @@
 	)
 	(wire
 		(pts
+			(xy 109.22 97.79) (xy 109.22 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2b6ef42-1f56-4a1b-8822-1c6e681b4e27")
+	)
+	(wire
+		(pts
+			(xy 100.33 90.17) (xy 109.22 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d5aed59a-67ee-40bf-b652-359c5b486573")
+	)
+	(wire
+		(pts
 			(xy 146.05 50.8) (xy 148.59 50.8)
 		)
 		(stroke
@@ -1820,6 +2116,36 @@
 			(type default)
 		)
 		(uuid "f261323b-4b7f-45ca-b039-9beb1e3fe6df")
+	)
+	(wire
+		(pts
+			(xy 91.44 95.25) (xy 91.44 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd0a3989-4b01-4476-8ac1-b6560eec15c9")
+	)
+	(text "LDO for sensors"
+		(exclude_from_sim no)
+		(at 82.296 77.978 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "1d0ef9a8-9a7f-4697-88f5-83d528c9ad45")
+	)
+	(text "Main 3.3V DC/DC"
+		(exclude_from_sim no)
+		(at 98.806 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "60de11a1-d3fa-4611-9e97-33dc4a281986")
 	)
 	(label "3.3V_P0"
 		(at 111.76 50.8 0)
@@ -1908,6 +2234,77 @@
 		)
 	)
 	(symbol
+		(lib_id "Regulator_Linear:AMS1117-3.3")
+		(at 77.47 90.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0f40e7ee-ff38-480f-a921-011c2a812f15")
+		(property "Reference" "U6"
+			(at 77.47 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMS1117-3.3"
+			(at 77.47 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
+			(at 77.47 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf"
+			(at 80.01 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"
+			(at 77.47 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d58c0be5-a55f-4fd8-8495-72d7253d9f0a")
+		)
+		(pin "1"
+			(uuid "5ffa4bb1-6675-4906-9077-96388081268b")
+		)
+		(pin "2"
+			(uuid "8d0b2ea8-ac19-40cc-b0bc-b782e766aeb2")
+		)
+		(instances
+			(project ""
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 120.65 62.23 0)
 		(unit 1)
@@ -1971,6 +2368,72 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
 					(reference "R29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 60.96 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "13067e5d-9761-4895-9fc0-93f21803af80")
+		(property "Reference" "#PWR92"
+			(at 60.96 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 60.96 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 60.96 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 60.96 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "25af2794-9b0e-4628-a4df-d1032c4628f6")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#PWR92")
 					(unit 1)
 				)
 			)
@@ -2104,6 +2567,72 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
 					(reference "R14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 100.33 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2f6b5d88-3a9c-4c51-8482-448f5a820617")
+		(property "Reference" "#PWR95"
+			(at 100.33 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 100.33 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 100.33 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 100.33 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3ea017a8-f58d-4030-bcc2-6c6ad50b82c7")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#PWR95")
 					(unit 1)
 				)
 			)
@@ -2316,6 +2845,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 109.22 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "414f7a7f-fc05-400b-9c8a-eb08318786e8")
+		(property "Reference" "#PWR91"
+			(at 109.22 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 109.22 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 109.22 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 109.22 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dbd09239-96f1-4c76-b7f6-ac25d663205e")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#PWR91")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 38.1 50.8 0)
 		(unit 1)
@@ -2517,6 +3112,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_Small")
+		(at 109.22 101.6 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6a039ea8-4907-4796-9214-be2d57be1a9e")
+		(property "Reference" "R38"
+			(at 109.982 100.076 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1k"
+			(at 110.236 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 109.22 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 109.22 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 109.22 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "53b56486-48e1-4ab3-9b40-242f3bea009d")
+		)
+		(pin "2"
+			(uuid "d20ae846-e04d-4463-b2c0-0a2d2429b01e")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "R38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 120.65 54.61 90)
 		(unit 1)
@@ -2581,6 +3245,76 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
 					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 91.44 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "80598c32-5239-41da-b6d7-13bc1b397a36")
+		(property "Reference" "C45"
+			(at 93.98 91.4462 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22u"
+			(at 93.98 93.9862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 91.44 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 91.44 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 91.44 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8e459160-bdc5-469f-bddc-2f8392a79df7")
+		)
+		(pin "1"
+			(uuid "babc1c74-ab48-405a-90b8-a1708e09d7eb")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "C45")
 					(unit 1)
 				)
 			)
@@ -2791,6 +3525,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 119.38 90.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "925daf73-c806-4f4a-a75d-2a0b36cb2f7d")
+		(property "Reference" "#PWR96"
+			(at 119.38 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V_LDO"
+			(at 119.38 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 119.38 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 119.38 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7791d3f9-dbf3-4247-831d-f58c0154e61a")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#PWR96")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 80.01 62.23 0)
 		(unit 1)
@@ -2851,6 +3651,76 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
 					(reference "#PWR37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 109.22 93.98 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "954216bd-bb74-4373-b498-e326b5207546")
+		(property "Reference" "D4"
+			(at 113.03 94.2974 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED"
+			(at 113.03 96.8374 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 109.22 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 109.22 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 109.22 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ab945344-34f9-4324-a705-525bffea9907")
+		)
+		(pin "2"
+			(uuid "a8310b12-866e-4863-9f8a-56891f06e3d5")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "D4")
 					(unit 1)
 				)
 			)
@@ -2991,6 +3861,207 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 91.44 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a8ce1a49-a13b-4ac3-84be-cafca12a6e6d")
+		(property "Reference" "#PWR94"
+			(at 91.44 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 91.44 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 91.44 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 91.44 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 91.44 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "16aa9822-c9fc-4e09-8f7f-d28f2d75c599")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#PWR94")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 121.92 90.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b2aac05e-a3fb-4726-ac41-e1b8e333c5b2")
+		(property "Reference" "#FLG4"
+			(at 121.92 88.265 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 127.762 88.392 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 121.92 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 121.92 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 121.92 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a7391d0d-e4b5-4d1f-b9a4-80387dd5363b")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#FLG4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 100.33 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b3e55f8c-1e20-4145-8688-f3e572dd9ecc")
+		(property "Reference" "C46"
+			(at 102.87 91.4462 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22u"
+			(at 102.87 93.9862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 100.33 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 100.33 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 100.33 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e5cc99c9-4eba-4a26-b667-fcf0305be58e")
+		)
+		(pin "1"
+			(uuid "86bd6b90-4758-4e26-a23a-a6ca81b3a7cd")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "C46")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 130.81 54.61 0)
 		(unit 1)
@@ -3055,6 +4126,76 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
 					(reference "C24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 60.96 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c50bc7fa-581d-4dec-b5b2-fbea09f84fd4")
+		(property "Reference" "C44"
+			(at 63.5 91.4462 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10u"
+			(at 63.5 93.9862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 60.96 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 60.96 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "eda65b28-bcaa-4490-96c1-a99b5763404f")
+		)
+		(pin "1"
+			(uuid "7ee220cb-2ef5-48fc-961d-0400c5e99098")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "C44")
 					(unit 1)
 				)
 			)
@@ -3539,6 +4680,72 @@
 			(project "sensor-hub"
 				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
 					(reference "#PWR40")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 77.47 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fdfa7327-60c3-40ff-9d89-72e544c690d1")
+		(property "Reference" "#PWR93"
+			(at 77.47 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 77.47 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 77.47 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 77.47 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 77.47 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c3520057-93f5-4c09-ac45-420bf0078b26")
+		)
+		(instances
+			(project "sensor-hub"
+				(path "/e168ef7b-16e4-493f-b63c-2f69374fc890/c562e511-fbc7-4452-9534-9d8032eb5f27"
+					(reference "#PWR93")
 					(unit 1)
 				)
 			)
