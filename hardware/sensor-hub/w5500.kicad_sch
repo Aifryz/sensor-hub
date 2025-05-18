@@ -8177,7 +8177,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "18n"
+		(property "Value" "18p"
 			(at 81.788 87.63 90)
 			(effects
 				(font
@@ -9532,7 +9532,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "18n"
+		(property "Value" "18p"
 			(at 81.788 80.01 90)
 			(effects
 				(font
