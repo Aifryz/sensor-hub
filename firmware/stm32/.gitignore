@@ -1,3 +1,16 @@
+#Directories
 Debug/*
+.vscode/*
+build/*
+CMakeFiles/*
 .settings/*
+# CubeMX generated CMake files
+cmake/*
+
+.mxproject
 *.bak
+CMakeCache.txt
+CMakePresets.json
+compile_commands.json
+cmake_install.cmake
+build.ninja
