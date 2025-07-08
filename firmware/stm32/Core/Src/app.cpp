@@ -17,6 +17,8 @@
 #include "log.hpp"
 #include "nrf_radio.hpp"
 
+extern "C" void SystemClock_Config(void);
+
 extern "C" int main(void)
 {
 	HAL_Init();
@@ -26,10 +28,11 @@ extern "C" int main(void)
 	MX_USART2_UART_Init();
 	MX_GPIO_Init();
 	MX_SPI1_Init();
-	MX_SPI2_Init();
-	log::log("Hi?");
-	log::log("This is a number: {}", 3);
-	log::log("Bytes, rx {}, tx {}", 3, 5);
+	MX_SPI4_Init();
+	MX_SPI5_Init();
+	logging::log("Hi?");
+	logging::log("This is a number: {}", 3);
+	logging::log("Bytes, rx {}, tx {}", 3, 5);
 
 	vTaskStartScheduler();
 

@@ -12,7 +12,7 @@
 #include <charconv>
 #include <mutex>
 
-namespace log
+namespace logging
 {
 	namespace impl
 	{
@@ -77,7 +77,7 @@ namespace log
 	void log(const char* fmt, T...args)
 	{
 		size_t start = 0U;
-		log::impl::log(fmt, start, args...);
+		impl::log(fmt, start, args...);
 	}
 
 

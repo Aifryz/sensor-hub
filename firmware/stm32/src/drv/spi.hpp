@@ -33,7 +33,9 @@ private:
 	TaskHandle_t waiting_task;
 };
 
-static spi nrf_spi{&hspi2};
+static spi lcd_spi{&hspi1};
+static spi nrf_spi{&hspi4};
+static spi eth_spi{&hspi5};
 
 
 #endif /* SPI_HPP_ */

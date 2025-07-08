@@ -7,7 +7,7 @@
 
 #include "unistd.h"
 
-namespace log::impl{
+namespace logging::impl{
 
 void log_part(const char* fmt, size_t beg, size_t end)
 {

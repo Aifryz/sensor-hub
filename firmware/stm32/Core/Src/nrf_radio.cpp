@@ -323,7 +323,7 @@ void nrf_task(void* arg)
 	nrf_cs_pin::clear();
 	nrf_spi.transfer(tx_buf, rx_buf, 4);
 	nrf_cs_pin::set();
-	user_led_pin::set();
+	sys_led_pin::set();
 	//uint8_t xtmp = nrf24_regs::w_register<-1>;
 
 	std::atomic<uint32_t> x;

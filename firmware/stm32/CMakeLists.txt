@@ -40,6 +40,18 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# Add FreeRTOS sources
+add_library(freertos_config INTERFACE)
+target_include_directories(freertos_config SYSTEM
+       INTERFACE src/config/) # The config file directory
+
+target_compile_definitions(freertos_config
+       INTERFACE
+       projCOVERAGE_TEST=0)
+
+set(FREERTOS_PORT GCC_ARM_CM4F CACHE STRING "")
+add_subdirectory(FreeRTOS-Kernel)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -48,11 +60,23 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    Core/Src/app.cpp
+    Core/Src/nrf_radio.cpp
+    Core/src/log.cpp
+    Core/src/syscalls.cpp
+    src/drv/spi.cpp
+    src/drv/usart.cpp
+    system/heap_4.c
+    system/system_hooks.cpp
+    
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+    FreeRTOS-Kernel/include/
+    src/
+    src/config/
 )
 
 # Add project symbols (macros)
@@ -63,6 +87,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
+    freertos_kernel
 
     # Add user defined libraries
 )
