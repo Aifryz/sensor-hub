@@ -286,9 +286,123 @@ class nrf24_radio
 public:
 	void init()
 	{
+
 		//hacked together just for now
+		uint8_t config_value = (nrf24::regs::config::enable_crc | 
+		  nrf24::regs::config::primary_rx | 
+		  nrf24::regs::config::crc_2byte).value;
+		write_register_unsafe(nrf24::regs::raw::config, config_value);
+
+		// enable pipe 0
+		write_register_unsafe(nrf24::regs::raw::en_rxaddr, nrf24::regs::en_rxaddr::enable_rx_pipe0.value);
+
+		// disable retransmit
+		write_register_unsafe(nrf24::regs::raw::setup_retr, 0);
+
+		//disable auto ack one every pipe
+		write_register_unsafe(nrf24::regs::raw::en_aa, 0);
+
+		// setup 5 byte address
+		write_register_unsafe(nrf24::regs::raw::setup_aw, nrf24::regs::setup_aw::addr_width_5bytes.value);
+
+		// rf setup 250kbps, 0dbm
+		write_register_unsafe(nrf24::regs::raw::rf_setup, (nrf24::regs::rf_setup::data_rate_250_kbps | nrf24::regs::rf_setup::rf_power_0dbm).value);
+
+		//datawidth setup
+		write_register_unsafe(nrf24::regs::raw::rx_pw_p0, 5);
 
 	}
+
+	void setup_rx_addr()
+	{
+		//setup rx address pipe 0
+		nrf_cs_pin::clear();
+		std::array<uint8_t, 5> addr = {0x76, 0x03, 0xC9, 0x63, 0x0C};
+		m_tx_buf[0] = nrf24_regs::w_register<nrf24::regs::raw::rx_addr_p0>;
+		for (size_t i = 0; i < addr.size(); ++i) {
+			m_tx_buf[i + 1] = addr[i];
+		}
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 6);
+		nrf_cs_pin::set();
+		m_last_status = m_rx_buf[0];
+	}
+
+	void power_up()
+	{
+		m_tx_buf[0] = nrf24_regs::r_register<nrf24::regs::raw::config>;
+		m_tx_buf[1] = 0xFF; // nop
+		nrf_cs_pin::clear();
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 2);	
+		nrf_cs_pin::set();
+		uint8_t config_value = m_rx_buf[1] | nrf24::regs::config::power_up.value;
+
+		m_tx_buf[0] = nrf24_regs::w_register<nrf24::regs::raw::config>;
+		m_tx_buf[1] = config_value;
+		nrf_cs_pin::clear();
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 2);
+		nrf_cs_pin::set();
+		nrf_ce_pin::set();
+ 	}
+
+	void power_down()
+	{
+		m_tx_buf[0] = nrf24_regs::r_register<nrf24::regs::raw::config>;
+		m_tx_buf[1] = 0xFF; // nop
+		nrf_cs_pin::clear();
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 2);	
+		nrf_cs_pin::set();
+		uint8_t config_value = m_rx_buf[1] & ~nrf24::regs::config::power_up.value;
+
+		m_tx_buf[0] = nrf24_regs::w_register<nrf24::regs::raw::config>;
+		m_tx_buf[1] = config_value;
+		nrf_cs_pin::clear();
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 2);
+		nrf_cs_pin::set();
+		nrf_ce_pin::clear();
+	}
+
+	uint8_t get_last_status() const
+	{
+		return m_last_status;
+	}
+
+	uint8_t read_status()
+	{
+		m_tx_buf[0] = nrf24_regs::nop;
+		nrf_cs_pin::clear();
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 1);
+		nrf_cs_pin::set();
+		m_last_status = m_rx_buf[0];
+		return m_last_status;
+	}
+
+	struct rx_data
+	{
+		uint8_t node_id;
+		uint8_t seq;
+		uint8_t tag;
+		int16_t data;
+	};
+
+	rx_data receive()
+	{
+		rx_data ret;
+		nrf_ce_pin::clear();
+		m_tx_buf[0] = nrf24_regs::r_rx_payload;
+		nrf_cs_pin::clear();
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 6);
+		nrf_cs_pin::set();
+		ret.node_id = m_rx_buf[1];
+		ret.seq = m_rx_buf[2];
+		ret.tag = m_rx_buf[3];
+		int16_t data = (((uint16_t)(m_rx_buf[4])) << 8) | (uint16_t)(m_rx_buf[5]);
+		ret.data = data;
+		nrf_ce_pin::set();
+		return ret;
+	}
+
+
+
 	template<uint8_t reg_addr>
 	void read_register(uint8_t len);
 	template<uint8_t reg_addr>
@@ -304,38 +418,87 @@ public:
 	void write_ack_payload(uint8_t len);
 	void write_tx_payload_no_ack(uint8_t len);
 	void nop();
+
+	void write_register_unsafe(uint8_t reg, uint8_t data)
+	{
+		nrf_cs_pin::clear();
+		m_tx_buf[0] = 0x20 | (reg & 0x1F); //todo fixme
+		m_tx_buf[1] = data;
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 2);
+		nrf_cs_pin::set();
+		m_last_status = m_rx_buf[0];
+	}
 private:
 	// RX buffer - status + upto 32 bytes of data
-	std::array<std::byte, 33> m_rx_buf;
+	std::array<uint8_t, 33> m_rx_buf;
 	// TX buffer - cmd + upto 32 bytes of data
-	std::array<std::byte, 33> m_tx_buf;
-	std::byte m_last_status;
+	std::array<uint8_t, 33> m_tx_buf;
+	uint8_t m_last_status;
 };
+
+nrf24_radio nrf24_device;
 
 void nrf_task(void* arg)
 {
 	nrf_cs_pin::set();
-	vTaskDelay(100);
-	std::byte rx_buf[4];
-	std::byte tx_buf[4];
-	std::memset(rx_buf, 0, 4);
-	std::memset(tx_buf, 0, 4);
-	nrf_cs_pin::clear();
-	nrf_spi.transfer(tx_buf, rx_buf, 4);
-	nrf_cs_pin::set();
-	sys_led_pin::set();
+	nrf_ce_pin::clear();
+	vTaskDelay(500); //wait for the radio to power up	
+
+	nrf24_device.init();
+
+	//   NRF24_SetChannel(&hNrf, channel);
+	uint8_t channel = 53;
+	nrf24_device.write_register_unsafe(nrf24::regs::raw::rf_ch, channel);
+
+   //NRF24_SetRXPipeAddr(&hNrf, addr, 0);
+   nrf24_device.setup_rx_addr();
+   
+
+
+
+   //NRF24_PowerUp(&hNrf);
+   nrf24_device.power_up();
+   vTaskDelay(5); //wait for the radio to power up	
+
+
+
+	//nrf_cs_pin::set();
+	//vTaskDelay(100);
+	//std::byte rx_buf[4];
+	//std::byte tx_buf[4];
+	//std::memset(rx_buf, 0, 4);
+	//std::memset(tx_buf, 0, 4);
+	//nrf_cs_pin::clear();
+	//nrf_spi.transfer(tx_buf, rx_buf, 4);
+	//nrf_cs_pin::set();
+	//sys_led_pin::set();
 	//uint8_t xtmp = nrf24_regs::w_register<-1>;
 
-	std::atomic<uint32_t> x;
-	x += 1;
+	//std::atomic<uint32_t> x;
+	//x += 1;
 	//xtmp = nrf24_regs::r_register<24>;
 	//xtmp = nrf24_regs::w_ack_payload<50>;
 	while(1)
 	{
-		std::printf("Hi nrf\r\n");
+		//std::printf("Hi nrf\r\n");
 		//user_led_pin::toggle();
+		sys_led_pin::toggle();
+		
+		nrf24_device.read_status();
+		uint8_t status = nrf24_device.get_last_status();
+		//std::printf("nrf status: 0x%02X\r\n", status);
+		uint8_t pipe = (status >> 1) &0x07;
+		if(pipe == 0)
+		{
+			auto data = nrf24_device.receive();
+			std::printf("Data: ID, %02X seq %02X tag %02x, data %d \r\n",
+				 data.node_id, data.seq, data.tag, data.data);
+			
 
-		vTaskDelay(500);
+		}
+
+		vTaskDelay(100);
+
 	}
 }
 

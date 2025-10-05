@@ -22,7 +22,7 @@ struct reg
 		static constexpr T mask = bmask;
 
 		template <T obm, T obv >
-		constexpr auto operator|(bits<obm, obv> other) const
+		constexpr auto operator|([[maybe_unused]] bits<obm, obv> other) const
 		{
 			static_assert(obm != bmask, "Cannot set differing values for the same bitmask");
 			static_assert(obm);

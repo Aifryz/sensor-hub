@@ -24,9 +24,9 @@ class spi
 {
 public:
 	spi(SPI_HandleTypeDef* handle);
-	int transfer(const std::byte* tx_bytes, std::byte* rx_bytes, size_t length);
-	int send(const std::byte* tx_bytes, size_t length);
-	int receive(std::byte* rx_bytes, size_t length);
+	int transfer(const uint8_t* tx_bytes, uint8_t* rx_bytes, size_t length);
+	int send(const uint8_t* tx_bytes, size_t length);
+	int receive(uint8_t* rx_bytes, size_t length);
 
 private:
 	SPI_HandleTypeDef* handle;
