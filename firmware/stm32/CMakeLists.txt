@@ -62,10 +62,13 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     Core/Src/app.cpp
     Core/Src/nrf_radio.cpp
+    Core/Src/lcd_display.cpp
     Core/src/log.cpp
     Core/src/syscalls.cpp
+    Core/src/ili9341.cpp
     src/drv/spi.cpp
     src/drv/usart.cpp
+    
     system/heap_4.c
     system/system_hooks.cpp
     
