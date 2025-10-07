@@ -1,7 +1,7 @@
 #include "ili9341.hpp"
 
-#include "bsp/board_gpio.hpp"
-#include "drv/spi.hpp"
+#include <bsp/board_gpio.hpp>
+#include <drivers/mcu/spi.hpp>
 
 
 #define HIGH 1

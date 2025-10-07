@@ -5,9 +5,7 @@
  *      Author: robal
  */
 
-#include "drv/spi.hpp"
-
-
+#include "spi.hpp"
 
 
 spi::spi(SPI_HandleTypeDef* spi):

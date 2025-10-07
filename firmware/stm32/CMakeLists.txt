@@ -43,7 +43,7 @@ add_subdirectory(cmake/stm32cubemx)
 # Add FreeRTOS sources
 add_library(freertos_config INTERFACE)
 target_include_directories(freertos_config SYSTEM
-       INTERFACE src/config/) # The config file directory
+       INTERFACE hub/config/) # The config file directory
 
 target_compile_definitions(freertos_config
        INTERFACE
@@ -59,27 +59,27 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user sources here
-    Core/Src/app.cpp
-    Core/Src/nrf_radio.cpp
-    Core/Src/lcd_display.cpp
-    Core/src/log.cpp
-    Core/src/syscalls.cpp
-    Core/src/ili9341.cpp
-    src/drv/spi.cpp
-    src/drv/usart.cpp
     
-    system/heap_4.c
-    system/system_hooks.cpp
-    
+    hub/board_main.cpp
+    hub/log.cpp
+    hub/drivers/mcu/spi.cpp
+    hub/drivers/mcu/usart.cpp
+    hub/drivers/peripheral/ili9341.cpp
+    hub/system/syscalls.cpp
+    hub/system/heap_4.c
+    hub/system/system_hooks.cpp
+
+    hub/tasks/lcd_display.cpp
+    hub/tasks/nrf_radio.cpp
+
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
     FreeRTOS-Kernel/include/
-    src/
-    src/config/
+    hub/
+    hub/config/
 )
 
 # Add project symbols (macros)

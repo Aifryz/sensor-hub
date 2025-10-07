@@ -8,7 +8,7 @@
 #ifndef BOARD_GPIO_HPP_
 #define BOARD_GPIO_HPP_
 
-#include "drv/gpio.hpp"
+#include <drivers/mcu/gpio.hpp>
 
 using sys_led_pin = pin<GPIOB_BASE, 2>;
 using sys_reset_pin = pin<GPIOA_BASE, 4>;

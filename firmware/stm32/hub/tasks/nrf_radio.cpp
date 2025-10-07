@@ -11,9 +11,9 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#include "drv/spi.hpp"
-#include "bsp/board_gpio.hpp"
-#include "safebits.hpp"
+#include <drivers/mcu/spi.hpp>
+#include <bsp/board_gpio.hpp>
+#include <safebits.hpp>
 #include <atomic>
 #include <array>
 
@@ -438,7 +438,7 @@ private:
 
 nrf24_radio nrf24_device;
 
-void nrf_task(void* arg)
+void nrf_task([[maybe_unused]] void* arg)
 {
 	nrf_cs_pin::set();
 	nrf_ce_pin::clear();

@@ -10,7 +10,7 @@
  *  we define them here so we can use nice C++ features
  */
 
-#include "drv/usart.hpp"
+#include <drivers/mcu/usart.hpp>
 
 extern "C" int _write(int file, char *ptr, int len)
 {

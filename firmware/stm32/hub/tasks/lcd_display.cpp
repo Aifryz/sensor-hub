@@ -4,15 +4,14 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#include "drv/spi.hpp"
-#include "bsp/board_gpio.hpp"
-#include "safebits.hpp"
-#include "lcd_display.hpp"
-#include "ili9341.hpp"
+#include <drivers/mcu/spi.hpp>
+#include <bsp/board_gpio.hpp>
+#include <safebits.hpp>
+#include <drivers/peripheral/ili9341.hpp>
 #include <atomic>
 #include <array>
 
-void lcd_task(void* arg)
+void lcd_task([[maybe_unused]] void* arg )
 {
     ILI9341_Init();
     //pwm :)

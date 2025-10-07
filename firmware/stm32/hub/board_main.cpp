@@ -15,8 +15,8 @@
 #include "task.h"
 
 #include "log.hpp"
-#include "nrf_radio.hpp"
-#include "lcd_display.hpp"
+#include <tasks/nrf_radio.hpp>
+#include <tasks/lcd_display.hpp>
 
 extern "C" void SystemClock_Config(void);
 
