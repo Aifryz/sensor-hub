@@ -199,7 +199,7 @@ void ILI9341_Init(void)
 
 	//memory access control
 	ILI9341_SendCmd8(0x36);
-	tx[0]=0x48;
+	tx[0]=0x28;
 	ILI9341_SendData(tx, 1);
 
 	//pixel format
