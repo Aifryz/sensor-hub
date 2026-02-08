@@ -7,6 +7,7 @@
 
 #include <drivers/mcu/spi.hpp>
 #include <bsp/board_gpio.hpp>
+#include <bsp/board_config.hpp>
 #include <safebits.hpp>
 #include <drivers/peripheral/ili9341.hpp>
 #include <atomic>
@@ -44,31 +45,17 @@ void lv_example_get_started_1(void)
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 }
 
-#define LCD_W 240
-#define LCD_H 320
-
 /*A static or global variable to store the buffers*/
 static lv_disp_draw_buf_t disp_buf;
 
 /*Static or global buffer(s). The second buffer is optional*/
-static lv_color_t buf_1[LCD_W * 10];
-//static lv_color_t buf_2[LCD_W * 10];
+constexpr size_t lvgl_color_buf_size = LCD_WIDTH * 10; // Buffer for 10 lines of the display
+static lv_color_t lvgl_color_buf[lvgl_color_buf_size];
 
 /*Initialize `disp_buf` with the buffer(s). With only one buffer use NULL instead buf_2 */
 
 void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
-    /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one
-     *`put_px` is just an example, it needs to implemented by you.*/
-    /*int32_t x, y;
-    for(y = area->y1; y <= area->y2; y++) {
-        for(x = area->x1; x <= area->x2; x++) {
-            //put_px(x, y, *color_p);
-            ILI9341_WrPixel(x, y, *color_p);
-            color_p++;
-        }
-    }
-        */
     ILI9341_SetAddr(area->x1, area->y1, area->x2, area->y2);
     uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
     ILI9341_SendData(reinterpret_cast<uint8_t*>(color_p), size * 2);    
@@ -85,16 +72,15 @@ void lcd_task([[maybe_unused]] void* arg )
     lv_init();
     //pwm :)
     //lcd_demo();
-    lv_disp_draw_buf_init(&disp_buf, buf_1, nullptr, LCD_W * 10);
+    lv_disp_draw_buf_init(&disp_buf, lvgl_color_buf, nullptr, lvgl_color_buf_size);
 
     static lv_disp_drv_t disp_drv;          /*A variable to hold the drivers. Must be static or global.*/
     lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
     disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
     disp_drv.flush_cb = my_flush_cb;        /*Set a flush callback to draw to the display*/
-    disp_drv.hor_res = LCD_W;                 /*Set the horizontal resolution in pixels*/
-    disp_drv.ver_res = LCD_H;                 /*Set the vertical resolution in pixels*/
-
-    disp_drv.color_format = LV_COLOR_FORMAT_NATIVE_REVERSE; // ?
+    disp_drv.hor_res = LCD_WIDTH;                 /*Set the horizontal resolution in pixels*/
+    disp_drv.ver_res = LCD_HEIGHT;                 /*Set the vertical resolution in pixels*/
+    disp_drv.color_format = LV_COLOR_FORMAT_NATIVE_REVERSE; // Reverse LSB/MSB order
 
     lv_disp_t * disp;
     disp = lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
@@ -104,9 +90,10 @@ void lcd_task([[maybe_unused]] void* arg )
     lv_example_get_started_1();
 
     while(1) {
-        vTaskDelay(1);;
+        vTaskDelay(1);
+        // Update LVGL tick
         lv_tick_inc(1);
-        lv_timer_handler(); // ?? 
+        lv_timer_handler();
     };
     
 }

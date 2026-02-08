@@ -1,14 +1,12 @@
 #include "ili9341.hpp"
 
 #include <bsp/board_gpio.hpp>
+#include <bsp/board_config.hpp>
 #include <drivers/mcu/spi.hpp>
 
 
 #define HIGH 1
 #define LOW 0
-
-#define LCD_W 240
-#define LCD_H 320
 
 //extern spi_device_handle_t lcdSpidev;
 
@@ -103,18 +101,18 @@ void ILI9341_SetAddr(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2)//set coord
 void ILI9341_Clear(uint16_t colour)
 {
 	uint16_t i,j;
-	ILI9341_SetAddr(0,0,LCD_W-1,LCD_H-1);
+	ILI9341_SetAddr(0,0,LCD_WIDTH-1,LCD_HEIGHT-1);
 
-	uint8_t buf[320*2];
+	uint8_t buf[LCD_WIDTH*2];
 
-	for(i=0;i<LCD_W;i++)
+	for(i=0;i<LCD_WIDTH;i++)
 	{
-		for(j=0;j<LCD_H;j++)
+		for(j=0;j<LCD_HEIGHT;j++)
 		{
 			buf[j*2+0] = colour>>8;
 			buf[j*2+1] = colour;
 		}
-		ILI9341_SendData(buf,LCD_H*2);
+		ILI9341_SendData(buf,LCD_HEIGHT*2);
 	}
 }
 
@@ -275,18 +273,5 @@ void ILI9341_Init(void)
 	vTaskDelay(120/ portTICK_PERIOD_MS);
 	//display on
 	ILI9341_SendCmd8(0x29);
-
-
-	const uint16_t a = 0xF800; // Top 5 bits set (red)
-	const uint16_t b = 0x07E0; // mid 6 bits set // green?
-	const uint16_t c = 0x001F; // lower 5 bits set (blue)
-	uint16_t col = a; //green
-	//col = 0;
-
-
-
-
-
-
 
 }
