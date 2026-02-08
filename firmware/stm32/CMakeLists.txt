@@ -52,6 +52,12 @@ target_compile_definitions(freertos_config
 set(FREERTOS_PORT GCC_ARM_CM4F CACHE STRING "")
 add_subdirectory(FreeRTOS-Kernel)
 
+#LVGL
+set(LV_CONF_PATH
+    ${CMAKE_CURRENT_SOURCE_DIR}/hub/config/lv_conf.h
+    CACHE STRING "" FORCE)
+add_subdirectory(lvgl)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -91,6 +97,6 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     freertos_kernel
-
+    lvgl::lvgl
     # Add user defined libraries
 )
