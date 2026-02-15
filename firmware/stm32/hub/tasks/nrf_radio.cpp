@@ -16,7 +16,7 @@
 #include <safebits.hpp>
 #include <atomic>
 #include <array>
-
+#include <sensors/sensors_db.hpp>
 
 struct nrf24_tag{};
 struct stm32_tag{};
@@ -493,6 +493,8 @@ void nrf_task([[maybe_unused]] void* arg)
 			auto data = nrf24_device.receive();
 			std::printf("Data: ID, %02X seq %02X tag %02x, data %d \r\n",
 				 data.node_id, data.seq, data.tag, data.data);
+			GetSensorDB().AddMeasurement(static_cast<SensorLocation>(data.node_id), static_cast<MeasurementType>(data.tag), data.data);
+
 			
 
 		}
@@ -506,5 +508,5 @@ void nrf_task([[maybe_unused]] void* arg)
 TaskHandle_t nrf_task_handle;
 void init_nrf_radio()
 {
-	BaseType_t ret = xTaskCreate(&nrf_task, "radio", 512, NULL, 7, &nrf_task_handle);
+	xTaskCreate(&nrf_task, "radio", 512, NULL, 7, &nrf_task_handle);
 }
