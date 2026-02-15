@@ -1,5 +1,4 @@
 #include "sensors_db.hpp"
-#include <cstdio>
 #include <cstdint>
 #include <limits>
 
@@ -12,14 +11,10 @@ SensorDB::SensorDB()
 {
     for(auto& node : m_data)
     {
-        //node.temperature = std::numeric_limits<int16_t>::min();
-        //node.humidity  = std::numeric_limits<int16_t>::min();
-        //node.light  = std::numeric_limits<int16_t>::min();
-        //node.battery  = std::numeric_limits<int16_t>::min();
-        node.temperature = 500;
-        node.humidity = 500;
-        node.light = 500;
-        node.battery = 500;
+        node.temperature = std::numeric_limits<int16_t>::min();
+        node.humidity  = std::numeric_limits<int16_t>::min();
+        node.light  = std::numeric_limits<int16_t>::min();
+        node.battery  = std::numeric_limits<int16_t>::min();
     }
 }
 
@@ -42,8 +37,6 @@ void SensorDB::AddMeasurement(SensorLocation location, MeasurementType type, int
         default:
             break;
     }
-
-    std::printf("Added mes %d, %d, %d, %d, %d ", location, m_data[location].temperature, m_data[location].humidity, m_data[location].light, m_data[location].battery);
 }
 
 std::optional<int16_t> SensorDB::GetLastMeasurement(SensorLocation location, MeasurementType type) const
