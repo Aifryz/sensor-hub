@@ -17,6 +17,7 @@
 #include <atomic>
 #include <array>
 #include <sensors/sensors_db.hpp>
+#include <log.hpp>
 
 struct nrf24_tag{};
 struct stm32_tag{};
@@ -440,6 +441,8 @@ nrf24_radio nrf24_device;
 
 void nrf_task([[maybe_unused]] void* arg)
 {
+	logging::log("Starting Radio task \r\n");
+
 	nrf_cs_pin::set();
 	nrf_ce_pin::clear();
 	vTaskDelay(500); //wait for the radio to power up	

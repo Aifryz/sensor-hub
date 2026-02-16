@@ -19,14 +19,14 @@ namespace logging
 		void log_part(const char* fmt, size_t beg, size_t end);
 
 		template<class T>
-		const char* log_var(const char* spec, T var)
+		inline const char* log_var(const char* spec, T var)
 		{
 			log_part("???", 0, 3);
 			return spec+2;
 		}
 
 		template<>
-		const char* log_var(const char* spec, int var)
+		inline const char* log_var(const char* spec, int var)
 		{
 			char buf[16];
 			std::to_chars_result x = std::to_chars(buf, buf+16, var);
@@ -45,7 +45,7 @@ namespace logging
 			return fmt_end;
 		}
 
-		void log(const char* spec, size_t off)
+		inline void log(const char* spec, size_t off)
 		{
 			size_t len = strlen(spec);
 			log_part(spec, off, len);

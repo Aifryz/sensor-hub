@@ -6,7 +6,7 @@
 #include "task.h"
 
 #include <lvgl.h>
-
+#include <log.hpp>
 #include <drivers/mcu/spi.hpp>
 #include <bsp/board_gpio.hpp>
 #include <bsp/board_config.hpp>
@@ -227,6 +227,10 @@ void updateTableData(lv_obj_t *table)
 
 void lcd_task([[maybe_unused]] void* arg )
 {
+    vTaskDelay(100);
+    logging::log("Starting LCD task \r\n");
+    // Not sure if it helps, but maybe fast init causes radio to not work?
+    vTaskDelay(5000);
     ILI9341_Init();
     lv_init();
     //pwm :)
@@ -268,5 +272,5 @@ void lcd_task([[maybe_unused]] void* arg )
 TaskHandle_t lcd_task_handle;
 void init_lcd_display()
 {
-	xTaskCreate(&lcd_task, "radio", 4096, NULL, 7, &lcd_task_handle);
+	xTaskCreate(&lcd_task, "lcd", 4096, NULL, 7, &lcd_task_handle);
 }

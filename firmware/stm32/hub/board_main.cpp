@@ -46,6 +46,8 @@ extern "C" int main(void)
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
 
+	logging::log("\r\nStarting scheduler\r\n");
+
 	vTaskStartScheduler();
 
 	while (1)
