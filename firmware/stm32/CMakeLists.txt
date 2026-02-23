@@ -77,6 +77,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
     hub/tasks/lcd_display.cpp
     hub/tasks/nrf_radio.cpp
+    hub/tasks/io_expander.cpp
 
     hub/sensors/sensors_db.cpp
 )

@@ -5,6 +5,7 @@
  *      Author: Robert Bicz
  */
 
+#include "i2c.h"
 #include "main.h"
 #include "usart.h"
 #include "spi.h"
@@ -17,6 +18,7 @@
 #include "log.hpp"
 #include <tasks/nrf_radio.hpp>
 #include <tasks/lcd_display.hpp>
+#include <tasks/io_expander.hpp>
 #include <bsp/board_gpio.hpp>
 
 extern "C" void SystemClock_Config(void);
@@ -27,6 +29,7 @@ extern "C" int main(void)
 
 	init_nrf_radio();
 	init_lcd_display();
+	init_io_expander();
 
 	SystemClock_Config();
 	MX_USART2_UART_Init();
@@ -34,6 +37,7 @@ extern "C" int main(void)
 	MX_SPI1_Init();
 	MX_SPI4_Init();
 	MX_SPI5_Init();
+	MX_I2C1_Init();
 	logging::log("Hi?");
 	logging::log("This is a number: {}", 3);
 	logging::log("Bytes, rx {}, tx {}", 3, 5);
@@ -50,6 +54,8 @@ extern "C" int main(void)
 
 	nrf_cs_pin::set();
 	nrf_ce_pin::clear();
+
+	sys_reset_pin::set(); // Deassert reset pin
 
 
 
