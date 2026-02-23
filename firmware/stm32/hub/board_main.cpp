@@ -17,12 +17,14 @@
 #include "log.hpp"
 #include <tasks/nrf_radio.hpp>
 #include <tasks/lcd_display.hpp>
+#include <bsp/board_gpio.hpp>
 
 extern "C" void SystemClock_Config(void);
 
 extern "C" int main(void)
 {
 	HAL_Init();
+
 	init_nrf_radio();
 	init_lcd_display();
 
@@ -45,6 +47,11 @@ extern "C" int main(void)
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
+
+	nrf_cs_pin::set();
+	nrf_ce_pin::clear();
+
+
 
 	logging::log("\r\nStarting scheduler\r\n");
 

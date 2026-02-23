@@ -429,6 +429,16 @@ public:
 		nrf_cs_pin::set();
 		m_last_status = m_rx_buf[0];
 	}
+
+		void read_register_unsafe(uint8_t reg)
+	{
+		nrf_cs_pin::clear();
+		m_tx_buf[0] = 0x00 | (reg & 0x1F); //todo fixme
+		//m_tx_buf[1] = data;
+		nrf_spi.transfer(m_tx_buf.data(), m_rx_buf.data(), 2);
+		nrf_cs_pin::set();
+		m_last_status = m_rx_buf[0];
+	}
 private:
 	// RX buffer - status + upto 32 bytes of data
 	std::array<uint8_t, 33> m_rx_buf;
@@ -453,10 +463,14 @@ void nrf_task([[maybe_unused]] void* arg)
 	uint8_t channel = 53;
 	nrf24_device.write_register_unsafe(nrf24::regs::raw::rf_ch, channel);
 
+	//nrf24_device.write_register_unsafe()
+
    //NRF24_SetRXPipeAddr(&hNrf, addr, 0);
    nrf24_device.setup_rx_addr();
-   
 
+   nrf24_device.read_register_unsafe(nrf24::regs::raw::rf_ch);
+   
+	//nrf24_device.read_register<uint8_t reg_addr>(uint8_t len)
 
 
    //NRF24_PowerUp(&hNrf);
@@ -485,7 +499,7 @@ void nrf_task([[maybe_unused]] void* arg)
 	{
 		//std::printf("Hi nrf\r\n");
 		//user_led_pin::toggle();
-		sys_led_pin::toggle();
+		
 		
 		nrf24_device.read_status();
 		uint8_t status = nrf24_device.get_last_status();
@@ -498,11 +512,12 @@ void nrf_task([[maybe_unused]] void* arg)
 				 data.node_id, data.seq, data.tag, data.data);
 			GetSensorDB().AddMeasurement(static_cast<SensorLocation>(data.node_id), static_cast<MeasurementType>(data.tag), data.data);
 
-			
+			sys_led_pin::set();
 
 		}
-
+		
 		vTaskDelay(100);
+		sys_led_pin::clear();
 
 	}
 }
