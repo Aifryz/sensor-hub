@@ -2,6 +2,7 @@
 #include "io_expander.hpp"
 
 //#include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal.h"
 #include "task.h"
 #include <log.hpp>
 #include "i2c.h"
@@ -66,6 +67,7 @@ class encoder
     
 };
 encoder enc;
+uint32_t enc_up_tick;
 void io_expander_task([[maybe_unused]] void* arg)
 {
     vTaskDelay(100);
@@ -80,7 +82,7 @@ void io_expander_task([[maybe_unused]] void* arg)
     uint8_t buf[8];
     
     
-    const size_t delay = 10;
+    const size_t delay = 1;
     uint8_t last_value = 0;
     while(1) {
         // Add IO Expander operations here
@@ -88,6 +90,7 @@ void io_expander_task([[maybe_unused]] void* arg)
         uint8_t pcal_address = 0x40;
         uint8_t input_port = 0x00;
         HAL_StatusTypeDef result = HAL_OK;
+        enc_up_tick = HAL_GetTick()%4096;
         result = HAL_I2C_Mem_Read(&hi2c1, pcal_address, input_port, I2C_MEMADD_SIZE_8BIT, buf, 1, 100);
         if(result != HAL_OK)
         {
@@ -109,6 +112,7 @@ void io_expander_task([[maybe_unused]] void* arg)
             encoder::InputState state = static_cast<encoder::InputState>(ab_state); // Assuming A is bit 0 and B is bit 1
             enc.update_state(state);
             logging::log("Encoder ticks: {}, full ticks: {}\r\n", (int)enc.get_ticks(), (int)enc.get_full_ticks());
+            
         }
         
         vTaskDelay(delay);
