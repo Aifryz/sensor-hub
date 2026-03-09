@@ -7,9 +7,11 @@
 
 #include "i2c.h"
 #include "main.h"
+#include "stm32f4xx_hal_tim.h"
 #include "usart.h"
 #include "spi.h"
 #include "gpio.h"
+#include "tim.h"
 #include <cstdio>
 
 #include "FreeRTOS.h"
@@ -38,26 +40,17 @@ extern "C" int main(void)
 	MX_SPI4_Init();
 	MX_SPI5_Init();
 	MX_I2C1_Init();
+	MX_TIM2_Init();
 	logging::log("Hi?");
 	logging::log("This is a number: {}", 3);
 	logging::log("Bytes, rx {}, tx {}", 3, 5);
-
-	// temporary PWM here
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	GPIO_InitStruct.Pin = GPIO_PIN_10;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
 
 	nrf_cs_pin::set();
 	nrf_ce_pin::clear();
 
 	sys_reset_pin::set(); // Deassert reset pin
 
-
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
 
 	logging::log("\r\nStarting scheduler\r\n");
 
