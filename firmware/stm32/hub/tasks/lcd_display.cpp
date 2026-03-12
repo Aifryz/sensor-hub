@@ -20,18 +20,65 @@
 #include <src/misc/lv_color.h>
 #include <src/misc/lv_timer.h>
 
+class lcd_spi_driver : public ili9341_io_driver
+{
+    constexpr static size_t BLOCK_SIZE = 256;
+  public:
+    void send_cmd(uint8_t *cmd, uint32_t len) override
+    {
+        lcd_dcrs_pin::clear();
+        lcd_cs_pin::clear();
+
+        uint32_t rem = len;
+        uint8_t *ptr = cmd;
+
+        while (rem > BLOCK_SIZE)
+        {
+            lcd_spi.send(ptr, BLOCK_SIZE);
+            rem -= BLOCK_SIZE;
+            ptr += BLOCK_SIZE;
+        }
+
+        lcd_spi.send(ptr, rem);
+
+        lcd_cs_pin::set();
+    }
+
+    void send_data(uint8_t *data, uint32_t len) override
+    {
+        lcd_dcrs_pin::set();
+        lcd_cs_pin::clear();
+        uint32_t rem = len;
+        uint8_t *ptr = data;
+
+        while (rem > BLOCK_SIZE)
+        {
+            lcd_spi.send(ptr, BLOCK_SIZE);
+            rem -= BLOCK_SIZE;
+            ptr += BLOCK_SIZE;
+        }
+
+        lcd_spi.send(ptr, rem);
+
+        lcd_cs_pin::set();
+    }
+};
+
+lcd_spi_driver lcd_io_driver;
+ili9341_lcd_driver lcd_driver{lcd_io_driver};
+
 static void lcd_demo()
 {
     while(true)
     {
         
-        ILI9341_Clear(0xFFFF); // White
+        lcd_driver.clear(0xFFFF); // White
         vTaskDelay(1000);
-        ILI9341_Clear(0xF800); // Red
+        lcd_driver.clear(0xF800); // Red
         vTaskDelay(1000);
-        ILI9341_Clear(0x07E0); // Green
+        lcd_driver.clear(0x07E0); // Green
         vTaskDelay(1000);
-        ILI9341_Clear(0x001F); // Blue
+        lcd_driver.clear(0x001F); // Blue
         vTaskDelay(1000);
     }
 }
@@ -87,9 +134,9 @@ static lv_color_t lvgl_color_buf[lvgl_color_buf_size];
 
 void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
-    ILI9341_SetAddr(area->x1, area->y1, area->x2, area->y2);
+    lcd_driver.set_addr(area->x1, area->y1, area->x2, area->y2);
     uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
-    ILI9341_SendData(reinterpret_cast<uint8_t*>(color_p), size * 2);    
+    lcd_driver.send_data(reinterpret_cast<uint8_t*>(color_p), size * 2);
 
     /* IMPORTANT!!!
      * Inform the graphics library that you are ready with the flushing*/
@@ -231,7 +278,7 @@ void lcd_task([[maybe_unused]] void* arg )
     logging::log("Starting LCD task \r\n");
     // Not sure if it helps, but maybe fast init causes radio to not work?
     vTaskDelay(5000);
-    ILI9341_Init();
+    lcd_driver.init();
     lv_init();
     //pwm :)
     //lcd_demo();

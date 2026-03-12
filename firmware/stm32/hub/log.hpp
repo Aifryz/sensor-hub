@@ -19,10 +19,10 @@ namespace logging
 		void log_part(const char* fmt, size_t beg, size_t end);
 
 		template<class T>
-		inline const char* log_var(const char* spec, T var)
+		inline const char* log_var([[maybe_unused]] const char* spec, [[maybe_unused]] T var)
 		{
-			log_part("???", 0, 3);
-			return spec+2;
+			static_assert(false, "Unsupported type for logging");
+			return nullptr;
 		}
 
 		template<>

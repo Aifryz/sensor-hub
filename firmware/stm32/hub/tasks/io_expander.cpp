@@ -3,10 +3,55 @@
 
 //#include "stm32f4xx_hal_def.h"
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal_tim.h"
 #include "task.h"
 #include <log.hpp>
 #include "i2c.h"
 #include "stm32f4xx_hal_i2c.h"
+#include "tim.h"
+
+namespace logging
+{
+    namespace impl
+    {
+        template<>
+		inline const char* log_var(const char* spec, HAL_StatusTypeDef var)
+		{
+            
+            switch(var)
+            {
+                case HAL_OK:
+                    log_part("HAL_OK", 0, 6);
+                    break;
+                case HAL_ERROR:
+                    log_part("HAL_ERROR", 0, 9);
+                    break;
+                case HAL_BUSY:
+                    log_part("HAL_BUSY", 0, 8);
+                    break;
+                case HAL_TIMEOUT:
+                    log_part("HAL_TIMEOUT", 0, 11);
+                    break;
+                default:
+                    log_part("UNKNOWN", 0, 7);
+            }
+
+			const char* fmt_end = spec;
+			while (*fmt_end != '\0')
+			{
+				if(*fmt_end == '}' && *(fmt_end+1) != '}'){
+					fmt_end++;
+					break;
+				}
+				fmt_end++;
+			}
+			return fmt_end;
+            
+		}
+    }
+
+}
 
 class encoder
 {
@@ -68,6 +113,7 @@ class encoder
 };
 encoder enc;
 uint32_t enc_up_tick;
+uint32_t last_update_tick;
 void io_expander_task([[maybe_unused]] void* arg)
 {
     vTaskDelay(100);
@@ -105,6 +151,14 @@ void io_expander_task([[maybe_unused]] void* arg)
 
             bool a = (ab_state & 0x01) != 0;
             bool b = (ab_state & 0x02) != 0;
+            bool btn = (buf[0] & 0x01) != 0;
+
+            last_update_tick = HAL_GetTick();
+            
+            // 0-3 GPIO, a,b, BUTTON, spare
+            // 4 - card det
+            // 5,6,7 - led
+            
             //logging::log("PCAL input changed: A {}, B {}\r\n", (int)a, (int)b);
             
             //logging::log("PCAL input changed: {}\r\n", (int)ab_state);
@@ -114,6 +168,20 @@ void io_expander_task([[maybe_unused]] void* arg)
             logging::log("Encoder ticks: {}, full ticks: {}\r\n", (int)enc.get_ticks(), (int)enc.get_full_ticks());
             
         }
+
+        {
+            uint32_t now = HAL_GetTick();
+            uint32_t delay_ms = 5000; // 5 seconds of inactivity before reset
+            if(now - last_update_tick > delay_ms)
+            {
+                htim2.Instance->CCR3 = 50; // Set to low brightness to indicate inactivity
+            }
+            else
+            {
+                htim2.Instance->CCR3 = 1000; // Set to high brightness to indicate activity
+            }
+        }
+        
         
         vTaskDelay(delay);
     }
