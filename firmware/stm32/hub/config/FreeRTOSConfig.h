@@ -120,4 +120,8 @@ standard names. */
 #define xPortPendSVHandler PendSV_Handler
 #define xPortSysTickHandler SysTick_Handler
 
+// Project specific
+//#define configGENERATE_RUN_TIME_STATS 1
+// Missing high-res timer
+
 #endif /* FREERTOS_CONFIG_H */

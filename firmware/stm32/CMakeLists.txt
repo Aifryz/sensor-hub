@@ -69,11 +69,14 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     hub/drivers/mcu/spi.cpp
     hub/drivers/mcu/usart.cpp
     hub/drivers/peripheral/ili9341.cpp
+    hub/drivers/peripheral/encoder.cpp
+
     hub/system/syscalls.cpp
     hub/system/heap_4.c
     hub/system/system_hooks.cpp
 
     hub/tasks/lcd_display.cpp
+    hub/tasks/table_screen.cpp
     hub/tasks/nrf_radio.cpp
     hub/tasks/io_expander.cpp
 
