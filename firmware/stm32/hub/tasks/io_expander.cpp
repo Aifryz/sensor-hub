@@ -7,7 +7,7 @@
 #include "stm32f4xx_hal_tim.h"
 #include "task.h"
 #include <log.hpp>
-#include "i2c.h"
+#include <drivers/mcu/i2c.hpp>
 #include "stm32f4xx_hal_i2c.h"
 #include "tim.h"
 
@@ -59,7 +59,7 @@ uint32_t enc_up_tick;
 uint32_t last_update_tick;
 void io_expander_task([[maybe_unused]] void* arg)
 {
-    vTaskDelay(100);
+    vTaskDelay(1000);
     logging::log("Starting IO Expander task \r\n");
     
     // For now, simple readout to make sure that everything on the board works ok,
@@ -80,11 +80,16 @@ void io_expander_task([[maybe_unused]] void* arg)
         uint8_t input_port = 0x00;
         HAL_StatusTypeDef result = HAL_OK;
         enc_up_tick = HAL_GetTick()%4096;
-        result = HAL_I2C_Mem_Read(&hi2c1, pcal_address, input_port, I2C_MEMADD_SIZE_8BIT, buf, 1, 100);
-        if(result != HAL_OK)
+
+        auto i2c_session = board_i2c.start_session();
+        auto i2c_result = i2c_session.mem_read(pcal_address, input_port, buf, 1);
+        if(i2c_result != i2c_error::None)
         {
-            logging::log("Error reading from IO expander: {}\r\n", result);
-        }
+            // for some reason, the PCAL gives error after some time
+            // so it works, but after some time we get 2 fails
+            // then it again works, probably initialization issue, let's ignore it for now
+            logging::log("Error reading from IO expander: {}\r\n", (int)i2c_result);
+        }        
         else if(buf[0] != last_value)
         {
             //logging::log("PCAL input changed: {}\r\n", (int)buf[0]);

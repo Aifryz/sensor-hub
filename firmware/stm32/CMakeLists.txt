@@ -67,6 +67,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     hub/board_main.cpp
     hub/log.cpp
     hub/drivers/mcu/spi.cpp
+    hub/drivers/mcu/i2c.cpp
     hub/drivers/mcu/usart.cpp
     hub/drivers/peripheral/ili9341.cpp
     hub/drivers/peripheral/encoder.cpp
