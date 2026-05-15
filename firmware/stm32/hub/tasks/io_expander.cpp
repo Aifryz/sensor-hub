@@ -85,9 +85,6 @@ void io_expander_task([[maybe_unused]] void* arg)
         auto i2c_result = i2c_session.mem_read(pcal_address, input_port, buf, 1);
         if(i2c_result != i2c_error::None)
         {
-            // for some reason, the PCAL gives error after some time
-            // so it works, but after some time we get 2 fails
-            // then it again works, probably initialization issue, let's ignore it for now
             logging::log("Error reading from IO expander: {}\r\n", (int)i2c_result);
         }        
         else if(buf[0] != last_value)

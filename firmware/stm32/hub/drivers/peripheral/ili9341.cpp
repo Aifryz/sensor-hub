@@ -9,16 +9,6 @@ ili9341_lcd_driver::ili9341_lcd_driver(ili9341_io_driver& driver)
 
 void ili9341_lcd_driver::init()
 {
-    //gpio_set_level(LCD_CS_PIN, LOW);
-	lcd_cs_pin::clear();
-	
-	//gpio_set_level(RESET_PIN, LOW); // Pull reset low
-	sys_reset_pin::clear();
-	vTaskDelay(5/ portTICK_PERIOD_MS);
-	//gpio_set_level(RESET_PIN, HIGH); // Pull reset low
-	sys_reset_pin::set();
-	vTaskDelay(150/ portTICK_PERIOD_MS);
-
 	uint8_t tx[16];
 	send_cmd_byte(0x01);//soft reset
 	vTaskDelay(1000/ portTICK_PERIOD_MS);
