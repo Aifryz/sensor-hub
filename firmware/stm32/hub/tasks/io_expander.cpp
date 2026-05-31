@@ -18,25 +18,25 @@ namespace logging
     namespace impl
     {
         template<>
-		inline const char* log_var(const char* spec, HAL_StatusTypeDef var)
+		inline const char* log_var(log_stream& stream, const char* spec, HAL_StatusTypeDef var)
 		{
             
             switch(var)
             {
                 case HAL_OK:
-                    log_part("HAL_OK", 0, 6);
+                    stream.write("HAL_OK", 6);
                     break;
                 case HAL_ERROR:
-                    log_part("HAL_ERROR", 0, 9);
+                    stream.write("HAL_ERROR", 9);
                     break;
                 case HAL_BUSY:
-                    log_part("HAL_BUSY", 0, 8);
+                    stream.write("HAL_BUSY", 8);
                     break;
                 case HAL_TIMEOUT:
-                    log_part("HAL_TIMEOUT", 0, 11);
+                    stream.write("HAL_TIMEOUT", 11);
                     break;
                 default:
-                    log_part("UNKNOWN", 0, 7);
+                    stream.write("UNKNOWN", 7);
             }
 
 			const char* fmt_end = spec;

@@ -32,6 +32,7 @@ extern "C" int main(void)
 	init_nrf_radio();
 	init_lcd_display();
 	init_io_expander();
+	logging::impl::get_logger().init();
 
 	SystemClock_Config();
 	MX_USART2_UART_Init();
@@ -41,9 +42,9 @@ extern "C" int main(void)
 	MX_SPI5_Init();
 	MX_I2C1_Init();
 	MX_TIM2_Init();
-	logging::log("Hi?");
-	logging::log("This is a number: {}", 3);
-	logging::log("Bytes, rx {}, tx {}", 3, 5);
+	//logging::log("Hi?");
+	//logging::log("This is a number: {}", 3);
+	//logging::log("Bytes, rx {}, tx {}", 3, 5);
 
 	nrf_cs_pin::set();
 	nrf_ce_pin::clear();
@@ -52,7 +53,7 @@ extern "C" int main(void)
 
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
 
-	logging::log("\r\nStarting scheduler\r\n");
+	//logging::log("\r\nStarting scheduler\r\n");
 
 	vTaskStartScheduler();
 

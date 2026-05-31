@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <cstdio>
 #include <cstring>
 
@@ -143,12 +144,15 @@ void lcd_task([[maybe_unused]] void* arg )
     while(1) {
         
         vTaskDelay(delay);
+        uint32_t start = HAL_GetTick();
         logging::log("Updating table data\r\n");
         updateTableData();
         // Update LVGL tick
         lv_tick_inc(delay);
         lv_timer_handler();
-        logging::log("LVGL done\r\n");
+        uint32_t end = HAL_GetTick();
+        logging::log("Table data updated, took {} ms\r\n", end - start);
+        //logging::log("LVGL done\r\n");
     };
     
 }

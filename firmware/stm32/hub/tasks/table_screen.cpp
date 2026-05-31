@@ -137,7 +137,6 @@ void updateTableData()
 {
 
    updateTimeLabel();
-
     char str[32];
     for (int col = 0; col < 5; col++)
     {

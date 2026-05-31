@@ -5,6 +5,7 @@
  *      Author: robal
  */
 
+#include <cmath>
 #include <cstdio>
 #include <cstring>
 
