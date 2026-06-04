@@ -6,6 +6,7 @@ CMakeFiles/*
 .settings/*
 # CubeMX generated CMake files
 cmake/*
+tests/build-host/*
 
 .mxproject
 *.bak
