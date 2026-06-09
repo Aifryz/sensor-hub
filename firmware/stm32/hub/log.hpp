@@ -56,87 +56,65 @@ namespace logging
             
         };
 
+        struct format_spec
+        {
+            const char* spec_start;
+            const char* spec_end;
+        };
+
+        inline size_t find_format_start(const char* fmt, size_t off)
+        {
+            size_t end = off;
+            while(fmt[end] != '\0')
+			{
+				if(fmt[end] == '{' && fmt[end+1] != '{'){
+					break;
+				}
+				end++;
+			}
+            return end;
+        }
+
         void write_data(const char* data, size_t len);
 
 
 		template<class T>
-		inline const char* log_var([[maybe_unused]] log_stream& stream, [[maybe_unused]] const char* spec, [[maybe_unused]] T var)
+		inline void log_var([[maybe_unused]] log_stream& stream, [[maybe_unused]] const format_spec& spec, [[maybe_unused]] T var)
 		{
 			static_assert(false, "Unsupported type for logging");
-			return nullptr;
 		}
 
         template<>
-        inline const char* log_var(log_stream& stream, const char* spec, const char* var)
+        inline void log_var(log_stream& stream, const format_spec& spec, const char* var)
         {
             stream.write(var, strlen(var));
-            const char* fmt_end = spec;
-            while (*fmt_end != '\0')
-            {
-                if(*fmt_end == '}' && *(fmt_end+1) != '}'){
-                    fmt_end++;
-                    break;
-                }
-                fmt_end++;
-            }
-            return fmt_end;
         }
 
         template<>
-        inline const char* log_var(log_stream& stream, const char* spec, char var)
+        inline void log_var(log_stream& stream, const format_spec& spec, char var)
         {
             char buf[2] = {var, '\0'};
             stream.write(buf, 1);
-            const char* fmt_end = spec;
-            while (*fmt_end != '\0')
-            {
-                if(*fmt_end == '}' && *(fmt_end+1) != '}'){
-                    fmt_end++;
-                    break;
-                }
-                fmt_end++;
-            }
-            return fmt_end;
         }
 
         template<>
-        inline const char* log_var(log_stream& stream, const char* spec, uint32_t var)
+        inline void log_var(log_stream& stream, const format_spec& spec, uint32_t var)
         {
             char buf[16];
             std::to_chars_result x = std::to_chars(buf, buf+16, var);
             int n = x.ptr-buf;
 
             stream.write(buf, n);
-            const char* fmt_end = spec;
-            while (*fmt_end != '\0')
-            {
-                if(*fmt_end == '}' && *(fmt_end+1) != '}'){
-                    fmt_end++;
-                    break;
-                }
-                fmt_end++;
-            }
-            return fmt_end;
         }
 
 		template<>
-		inline const char* log_var(log_stream& stream, const char* spec, int var)
+		inline void log_var(log_stream& stream, const format_spec& spec, int var)
 		{
 			char buf[16];
 			std::to_chars_result x = std::to_chars(buf, buf+16, var);
 			int n = x.ptr-buf;
 
             stream.write(buf, n);
-			const char* fmt_end = spec;
-			while (*fmt_end != '\0')
-			{
-				if(*fmt_end == '}' && *(fmt_end+1) != '}'){
-					fmt_end++;
-					break;
-				}
-				fmt_end++;
-			}
-			return fmt_end;
 		}
 
 		inline void log(log_stream& stream, const char* spec, size_t off)
@@ -149,20 +127,23 @@ namespace logging
 		void log(log_stream& stream, const char* fmt, size_t off, U arg, T...args)
 		{
 			size_t beg = off;
-			size_t end = off;
-			while(fmt[end] != '\0')
-			{
-				if(fmt[end] == '{' && fmt[end+1] != '{'){
-					break;
-				}
-				end++;
-			}
+			size_t end = find_format_start(fmt, off);
+            size_t part_end = end-beg;
+            const char* format_start = fmt+end;
+            //find end of format specifier
+            while(fmt[end] != '\0' && fmt[end] != '}')
+            {
+                end++;
+            }
+            
+            const char* format_end = fmt+end;
+			
 			//Found { or NUL, log preceding
-            stream.write(fmt+beg, end-beg);
+            stream.write(fmt+beg, part_end);
 			//Format the data
-			const char* spec_end = log_var(stream, fmt+end, arg);
+			log_var(stream, format_spec{format_start, format_end}, arg);
 			//Format rest
-			log(stream, spec_end, off, args...);
+			log(stream, format_end+1, off, args...);
 		}
 
         logger& get_logger();
