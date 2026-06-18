@@ -65,7 +65,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     
     hub/board_main.cpp
-    hub/log.cpp
+    hub/log_impl.cpp
     hub/drivers/mcu/spi.cpp
     hub/drivers/mcu/i2c.cpp
     hub/drivers/mcu/usart.cpp

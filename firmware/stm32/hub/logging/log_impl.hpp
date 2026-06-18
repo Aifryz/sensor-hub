@@ -1,29 +1,16 @@
-/*
- * log.hpp
- *
- *  Created on: Feb 13, 2023
- *      Author: robal
- */
-
-#ifndef INC_LOG_HPP_
-#define INC_LOG_HPP_
-
-#include <cstring>
-#include <charconv>
-#include <mutex>
-#include <utility>
+#pragma once
+#include <cstdint>
+#include <string_view>
 #include <array>
-
-#include "FreeRTOS.h"
-#include "semphr.h"
+#include <charconv>
 
 namespace logging
 {
-	namespace impl
+namespace impl
 	{
         // User facing log stream object 
         class log_stream
-        {
+        { 
         public:
 
             void write(const char* data, size_t len);
@@ -58,8 +45,35 @@ namespace logging
 
         struct format_spec
         {
-            const char* spec_start;
-            const char* spec_end;
+            format_spec();
+
+            enum class alignment_type: uint8_t
+            {
+                left,
+                right,
+                center,
+                none
+            };
+
+            enum class sign_type: uint8_t
+            {
+                plus,
+                minus,
+                space,
+                none
+            };
+
+            char fill;
+            uint8_t width;
+            uint8_t precision;
+
+            alignment_type align: 2;
+            sign_type sign: 2;
+            bool alt_form: 1;
+            bool zero_pad: 1;
+            char type;
+
+            static format_spec parse(std::string_view spec);
         };
 
         inline size_t find_format_start(const char* fmt, size_t off)
@@ -83,6 +97,15 @@ namespace logging
 		{
 			static_assert(false, "Unsupported type for logging");
 		}
+
+        template<class T> requires std::integral<T>
+        inline void log_var(log_stream& stream, const format_spec& spec, T var)
+        {
+            char buf[16];
+            std::to_chars_result x = std::to_chars(buf, buf+16, var);
+            int n = x.ptr-buf;
+            stream.write(buf, n);
+        }
 
         template<>
         inline void log_var(log_stream& stream, const format_spec& spec, const char* var)
@@ -126,6 +149,11 @@ namespace logging
 		template<class U, class...T>
 		void log(log_stream& stream, const char* fmt, size_t off, U arg, T...args)
 		{
+            if(fmt == nullptr || fmt[off] == '\0')
+            {
+                // todo - maybe assert?
+                return;
+            }
 			size_t beg = off;
 			size_t end = find_format_start(fmt, off);
             size_t part_end = end-beg;
@@ -141,7 +169,8 @@ namespace logging
 			//Found { or NUL, log preceding
             stream.write(fmt+beg, part_end);
 			//Format the data
-			log_var(stream, format_spec{format_start, format_end}, arg);
+            auto spec = format_spec::parse(std::string_view(format_start, format_end-format_start));
+			log_var(stream, spec, arg);
 			//Format rest
 			log(stream, format_end+1, off, args...);
 		}
@@ -149,39 +178,4 @@ namespace logging
         logger& get_logger();
 
 	}
-
-	template<class...T>
-	void log(const char* fmt, T...args)
-	{
-        impl::log_stream& stream = impl::get_logger().get_stream();
-
-        impl::get_logger().lock();
-
-
-		size_t start = 0U;
-		impl::log(stream, fmt, start, args...);
-
-        //stream.write("\r\n", 2);
-
-        // for now, just flush single logs
-        // twice since the message may be split
-        for (int i = 0; i < 2; i++)
-        {
-            const auto &[data, len] = stream.get_contiguous_data();
-            if (data != nullptr && len > 0)
-            {
-                // debug_uart.send(reinterpret_cast<const std::byte*>(data), len);
-                //  for now, just write to stdout
-                impl::write_data(reinterpret_cast<const char *>(data), len);
-            }
-        }
-
-        impl::get_logger().unlock();
-
-	}
-
-
 }
-
-
-#endif /* INC_LOG_HPP_ */

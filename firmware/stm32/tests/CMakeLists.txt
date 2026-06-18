@@ -7,7 +7,7 @@ include(FetchContent)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 FetchContent_Declare(
@@ -19,7 +19,9 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(logging_tests
     log_tests.cpp
-    ../hub/log.cpp
+    stream_buffer_tests.cpp
+    ../hub/logging/log_impl.cpp
+    ../hub/logging/fifo_buffer.cpp
 )
 
 target_include_directories(logging_tests PRIVATE

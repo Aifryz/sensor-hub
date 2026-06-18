@@ -505,7 +505,7 @@ void nrf_task([[maybe_unused]] void* arg)
 		nrf24_device.read_status();
 		uint8_t status = nrf24_device.get_last_status();
 		//std::printf("nrf status: 0x%02X\r\n", status);
-		uint8_t pipe = (status >> 1) &0x07;
+		uint8_t pipe = (status >> 1) &0x07; 
 		if(pipe == 0)
 		{
 			auto data = nrf24_device.receive();
