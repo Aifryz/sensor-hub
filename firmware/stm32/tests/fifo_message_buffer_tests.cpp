@@ -1,10 +1,10 @@
 #include <catch2/catch_test_macros.hpp>
-#include "logging/fifo_buffer.hpp"
+#include "logging/fifo_message_buffer.hpp"
 
 TEST_CASE("buffer exposes contiguous bytes", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer buffer(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer buffer(buffer_memory, sizeof(buffer_memory));
 
     const char* data = "abcdef";
     buffer.write(reinterpret_cast<const uint8_t*>(data), 6);
@@ -19,7 +19,7 @@ TEST_CASE("buffer exposes contiguous bytes", "[logging]")
 TEST_CASE("buffer handles multiple writes and reads", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer buffer(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer buffer(buffer_memory, sizeof(buffer_memory));
 
     const char* data1 = "abc";
     const char* data2 = "defG";
@@ -44,7 +44,7 @@ TEST_CASE("buffer handles multiple writes and reads", "[logging]")
 TEST_CASE("buffer handles wrap around", "[logging]") 
 {
     uint8_t buffer_memory[10];
-    fifo_buffer buffer(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer buffer(buffer_memory, sizeof(buffer_memory));
 
     const char* data1 = "abcdefgh";
     buffer.write(reinterpret_cast<const uint8_t*>(data1), 8);
@@ -70,7 +70,7 @@ TEST_CASE("buffer handles wrap around", "[logging]")
 TEST_CASE("buffer does not allow overflow", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer buffer(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer buffer(buffer_memory, sizeof(buffer_memory));
 
     const char* data1 = "abcdefghi";
     bool result1 = buffer.write(reinterpret_cast<const uint8_t*>(data1), 9);
@@ -84,7 +84,7 @@ TEST_CASE("buffer does not allow overflow", "[logging]")
 TEST_CASE("buffer writes data in parts", "[logging]")
 {
     uint8_t buffer_memory[20];
-    fifo_buffer stream(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer stream(buffer_memory, sizeof(buffer_memory));
 
     stream.write(reinterpret_cast<const uint8_t*>("abcefgh"), 7);
     stream.write(reinterpret_cast<const uint8_t*>("ijklm"), 5);
@@ -103,7 +103,7 @@ TEST_CASE("buffer writes data in parts", "[logging]")
 TEST_CASE("buffer perfect fill", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer stream(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer stream(buffer_memory, sizeof(buffer_memory));
 
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("abc"), 3));
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("def"), 3));
@@ -131,7 +131,7 @@ TEST_CASE("buffer perfect fill", "[logging]")
 TEST_CASE("buffer perfect across wrap", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer stream(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer stream(buffer_memory, sizeof(buffer_memory));
 
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("abc"), 3));
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("def"), 3));
@@ -175,7 +175,7 @@ TEST_CASE("buffer perfect across wrap", "[logging]")
 TEST_CASE("buffer write one", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer stream(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer stream(buffer_memory, sizeof(buffer_memory));
 
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("abcdefghi"), 9));
 
@@ -197,7 +197,7 @@ TEST_CASE("buffer write one", "[logging]")
 TEST_CASE("buffer write two", "[logging]")
 {
     uint8_t buffer_memory[10];
-    fifo_buffer stream(buffer_memory, sizeof(buffer_memory));
+    fifo_message_buffer stream(buffer_memory, sizeof(buffer_memory));
 
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("abcd"), 4));
     REQUIRE(stream.write(reinterpret_cast<const uint8_t*>("efgh"), 4));

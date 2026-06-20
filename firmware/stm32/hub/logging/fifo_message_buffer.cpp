@@ -1,9 +1,9 @@
-#include "fifo_buffer.hpp"
+#include "fifo_message_buffer.hpp"
 
 #include <algorithm>
 #include <cstring>
 
-fifo_buffer::fifo_buffer(uint8_t* buffer, size_t buffer_size)
+fifo_message_buffer::fifo_message_buffer(uint8_t* buffer, size_t buffer_size)
     : m_buffer(buffer)
     , m_buffer_size(buffer_size)
     , m_write_index(0)
@@ -17,7 +17,7 @@ fifo_buffer::fifo_buffer(uint8_t* buffer, size_t buffer_size)
     std::fill(m_buffer, m_buffer + m_message_header_size, 0); 
 }
 
-bool fifo_buffer::write(const uint8_t* data, size_t len)
+bool fifo_message_buffer::write(const uint8_t* data, size_t len)
 {
     if(m_full)
         return false;
@@ -60,7 +60,7 @@ bool fifo_buffer::write(const uint8_t* data, size_t len)
     return false;
 }
 
-std::pair<const uint8_t*, size_t> fifo_buffer::read_next()
+std::pair<const uint8_t*, size_t> fifo_message_buffer::read_next()
 {
     size_t message_length = get_next_read_size();
     if (message_length == 0)
@@ -70,7 +70,7 @@ std::pair<const uint8_t*, size_t> fifo_buffer::read_next()
     return {&m_buffer[data_index], message_length};
 }
 
-void fifo_buffer::release()
+void fifo_message_buffer::release()
 {
     size_t message_length = get_next_read_size();
     if (message_length == 0)
@@ -98,7 +98,7 @@ void fifo_buffer::release()
     m_full = false;
 }
 
-size_t fifo_buffer::determine_message_header_size(size_t buffer_size) const
+size_t fifo_message_buffer::determine_message_header_size(size_t buffer_size) const
 {
     // Reserve some space for the message header, which will store the length of the message
     if (buffer_size <= 0xFF)
@@ -111,7 +111,7 @@ size_t fifo_buffer::determine_message_header_size(size_t buffer_size) const
         return 4;
 }
 
-size_t fifo_buffer::get_next_read_size() const
+size_t fifo_message_buffer::get_next_read_size() const
 {
     if (m_write_index == m_read_index && !m_full)
         return 0; // Buffer is empty
@@ -121,7 +121,7 @@ size_t fifo_buffer::get_next_read_size() const
     return read_message_length(header_index);
 }
 
-size_t fifo_buffer::read_message_length(size_t header_index) const
+size_t fifo_message_buffer::read_message_length(size_t header_index) const
 {
     size_t message_length = 0;
     for (size_t i = 0; i < m_message_header_size; ++i)
@@ -132,7 +132,7 @@ size_t fifo_buffer::read_message_length(size_t header_index) const
     return message_length;
 }
 
-void fifo_buffer::write_message_length(size_t header_index, size_t message_length)
+void fifo_message_buffer::write_message_length(size_t header_index, size_t message_length)
 {
     for (size_t i = 0; i < m_message_header_size; ++i)
     {

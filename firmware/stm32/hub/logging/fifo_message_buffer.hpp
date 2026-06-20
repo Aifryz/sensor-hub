@@ -7,10 +7,10 @@
  * 
  *
  */
-class fifo_buffer
+class fifo_message_buffer
 {
 public:
-    fifo_buffer(uint8_t* buffer, size_t buffer_size);
+    fifo_message_buffer(uint8_t* buffer, size_t buffer_size);
 
     /// Writes data to the buffer, the data is copied into the buffer
     /// Returns true if the data was written successfully, false if there was not enough space in the buffer

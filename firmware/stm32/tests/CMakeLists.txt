@@ -19,9 +19,9 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(logging_tests
     log_tests.cpp
-    stream_buffer_tests.cpp
+    fifo_message_buffer_tests.cpp
     ../hub/logging/log_impl.cpp
-    ../hub/logging/fifo_buffer.cpp
+    ../hub/logging/fifo_message_buffer.cpp
 )
 
 target_include_directories(logging_tests PRIVATE
