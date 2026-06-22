@@ -126,8 +126,7 @@ size_t fifo_message_buffer::read_message_length(size_t header_index) const
     size_t message_length = 0;
     for (size_t i = 0; i < m_message_header_size; ++i)
     {
-        message_length |= static_cast<size_t>(m_buffer[header_index]) << (8 * i);
-        header_index = (header_index + 1) % m_buffer_size;
+        message_length |= static_cast<size_t>(m_buffer[header_index + i]) << (8 * i);
     }
     return message_length;
 }
@@ -136,7 +135,6 @@ void fifo_message_buffer::write_message_length(size_t header_index, size_t messa
 {
     for (size_t i = 0; i < m_message_header_size; ++i)
     {
-        m_buffer[header_index] = static_cast<uint8_t>(message_length >> (8 * i));
-        header_index = (header_index + 1) % m_buffer_size;
+        m_buffer[header_index + i] = static_cast<uint8_t>(message_length >> (8 * i));
     }
 }
