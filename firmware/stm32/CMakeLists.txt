@@ -12,6 +12,9 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 
 # Define the build type
 if(NOT CMAKE_BUILD_TYPE)
@@ -65,7 +68,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     
     hub/board_main.cpp
-    hub/log_impl.cpp
+    hub/logging/log_impl.cpp
     hub/drivers/mcu/spi.cpp
     hub/drivers/mcu/i2c.cpp
     hub/drivers/mcu/usart.cpp

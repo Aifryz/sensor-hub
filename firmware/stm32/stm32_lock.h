@@ -7,13 +7,18 @@
   * @details
   * This implementation supports the following strategies for handling
   * thread-safe locks. The strategy can be explicitly selected by
-  * defining <tt>\STM32_THREAD_SAFE_STRATEGY = \<number></tt> in the project.
+  * defining exactly one of the following macros in the project:
+  * 1. STM32_THREAD_SAFE_USER_LOCKS=1
+  * 2. STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS=1
+  * 3. STM32_THREAD_SAFE_BAREMETAL_DENY_LOCKS=1
+  * 4. STM32_THREAD_SAFE_FREERTOS_ALLOW_LOCKS=1
+  * 5. STM32_THREAD_SAFE_FREERTOS_DENY_LOCKS=1
   * Please look at the '<toolchain/library>_lock_glue.c' file for more details.
   *
   * 1. User defined thread-safe implementation.
   *    User defined solution for handling thread-safety.
   *    <br>
-  *    <b>NOTE:</b> The stubs in stm32_lock_user.h needs to be implemented to gain
+  *    <b>NOTE:</b> The stubs in stm32_lock_user.h need to be implemented to gain
   *    thread-safety.
   *
   * 2. [<b>DEFAULT</b>] Allow lock usage from interrupts.
@@ -48,13 +53,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021, 2023 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
  */
@@ -67,9 +71,39 @@
 #include <stddef.h>
 #include <cmsis_compiler.h>
 
-#ifndef STM32_THREAD_SAFE_STRATEGY
-#define STM32_THREAD_SAFE_STRATEGY 2 /**< Assume strategy 2 if not specified */
+
+/** Ensure compatibility with older versions */
+#ifdef STM32_THREAD_SAFE_STRATEGY
+
+#if STM32_THREAD_SAFE_STRATEGY == 1
+#define STM32_THREAD_SAFE_USER_LOCKS 1
+#elif STM32_THREAD_SAFE_STRATEGY == 2
+#define STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS 1
+#elif STM32_THREAD_SAFE_STRATEGY == 3
+#define STM32_THREAD_SAFE_BAREMETAL_DENY_LOCKS 1
+#elif STM32_THREAD_SAFE_STRATEGY == 4
+#define STM32_THREAD_SAFE_FREERTOS_ALLOW_LOCKS 1
+#elif STM32_THREAD_SAFE_STRATEGY == 5
+#define STM32_THREAD_SAFE_FREERTOS_DENY_LOCKS 1
+#else
+#error Invalid value for STM32_THREAD_SAFE_STRATEGY: expected 1..5
+#endif /* STM32_THREAD_SAFE_STRATEGY value switch */
+
 #endif /* STM32_THREAD_SAFE_STRATEGY */
+
+#if !defined(STM32_THREAD_SAFE_USER_LOCKS) \
+ && !defined(STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS) \
+ && !defined(STM32_THREAD_SAFE_BAREMETAL_DENY_LOCKS) \
+ && !defined(STM32_THREAD_SAFE_FREERTOS_ALLOW_LOCKS) \
+ && !defined(STM32_THREAD_SAFE_FREERTOS_DENY_LOCKS)
+
+/** Assume strategy "bare metal - allow" if not specified */
+#define STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS 1
+
+#warning No STM32_THREAD_SAFE_* macro was defined
+#warning Defaulting to STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS
+
+#endif /* no strategy macro defined */
 
 #ifdef __cplusplus
 extern "C" {
@@ -114,10 +148,10 @@ void Error_Handler(void);
 /** Size of array */
 #define STM32_LOCK_ARRAY_SIZE(array) (sizeof(array) / sizeof((array)[0]))
 
-#if STM32_THREAD_SAFE_STRATEGY == 1
+#if defined(STM32_THREAD_SAFE_USER_LOCKS) && (STM32_THREAD_SAFE_USER_LOCKS != 0)
 /*
- * User defined thread-safe implementation.
- */
+  * User defined thread-safe implementation.
+  */
 
 /* Includes ----------------------------------------------------------------*/
 /** STM32 lock API version */
@@ -125,24 +159,23 @@ void Error_Handler(void);
 #include "stm32_lock_user.h"
 #undef STM32_LOCK_API
 
-#elif STM32_THREAD_SAFE_STRATEGY == 2
+#elif defined(STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS) && (STM32_THREAD_SAFE_BAREMETAL_ALLOW_LOCKS != 0)
 /*
  * Allow lock usage from interrupts.
  */
 
 /* Private defines ---------------------------------------------------------*/
 /** Initialize members in instance of <code>LockingData_t</code> structure */
-#define LOCKING_DATA_INIT { 0, 0 }
+#define LOCKING_DATA_INIT 0
 
 /* Private typedef ---------------------------------------------------------*/
-typedef struct
-{
-  uint8_t flag; /**< Backup of PRIMASK.PM at nesting level 0 */
-  uint8_t counter; /**< Nesting level */
-} LockingData_t;
+typedef uint8_t LockingData_t; /* not used */
+
+/* Private variables -------------------------------------------------------*/
+extern uint32_t gflag;
+extern uint32_t call_counter;
 
 /* Private functions -------------------------------------------------------*/
-
 /**
   * @brief Initialize STM32 lock
   * @param lock The lock to init
@@ -150,8 +183,6 @@ typedef struct
 static inline void stm32_lock_init(LockingData_t *lock)
 {
   STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
-  lock->flag = 0;
-  lock->counter = 0;
 }
 
 /**
@@ -160,20 +191,14 @@ static inline void stm32_lock_init(LockingData_t *lock)
   */
 static inline void stm32_lock_acquire(LockingData_t *lock)
 {
-  uint8_t flag = (uint8_t)(__get_PRIMASK() & 0x1); /* PRIMASK.PM */
+  uint32_t flag = __get_PRIMASK();
+  (void)(lock);
   __disable_irq();
-  __DSB();
-  __ISB();
-  STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
-  if (lock->counter == 0)
+  if (call_counter == 0)
   {
-    lock->flag = flag;
+    gflag = flag;
   }
-  else if (lock->counter == UINT8_MAX)
-  {
-    STM32_LOCK_BLOCK();
-  }
-  lock->counter++;
+  call_counter++;
 }
 
 /**
@@ -182,19 +207,15 @@ static inline void stm32_lock_acquire(LockingData_t *lock)
   */
 static inline void stm32_lock_release(LockingData_t *lock)
 {
-  STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
-  if (lock->counter == 0)
+  (void)(lock);
+  call_counter--;
+  if (call_counter == 0)
   {
-    STM32_LOCK_BLOCK();
-  }
-  lock->counter--;
-  if (lock->counter == 0 && lock->flag == 0)
-  {
-    __enable_irq();
+    __set_PRIMASK(gflag);
   }
 }
 
-#elif STM32_THREAD_SAFE_STRATEGY == 3
+#elif defined(STM32_THREAD_SAFE_BAREMETAL_DENY_LOCKS) && (STM32_THREAD_SAFE_BAREMETAL_DENY_LOCKS != 0)
 /*
  * Deny lock usage from interrupts.
  */
@@ -237,7 +258,7 @@ static inline void stm32_lock_release(LockingData_t *lock)
   STM32_LOCK_BLOCK_IF_INTERRUPT_CONTEXT();
 }
 
-#elif STM32_THREAD_SAFE_STRATEGY == 4
+#elif defined(STM32_THREAD_SAFE_FREERTOS_ALLOW_LOCKS) && (STM32_THREAD_SAFE_FREERTOS_ALLOW_LOCKS != 0)
 /*
  * Allow lock usage from interrupts. Implemented using FreeRTOS locks.
  */
@@ -246,9 +267,9 @@ static inline void stm32_lock_release(LockingData_t *lock)
 #include <FreeRTOS.h>
 #include <task.h>
 
-#if defined (__GNUC__) && !defined (__CC_ARM) && configUSE_NEWLIB_REENTRANT == 0
+#if defined (__GNUC__) && !defined (__CC_ARM) && !(defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)) && configUSE_NEWLIB_REENTRANT == 0
 #warning Please set configUSE_NEWLIB_REENTRANT to 1 in FreeRTOSConfig.h, otherwise newlib will not be thread-safe
-#endif /* defined (__GNUC__) && !defined (__CC_ARM) && configUSE_NEWLIB_REENTRANT == 0 */
+#endif /* defined (__GNUC__) && !defined (__CC_ARM) && !(defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)) && configUSE_NEWLIB_REENTRANT == 0 */
 
 /* Private defines ---------------------------------------------------------*/
 /** Initialize members in instance of <code>LockingData_t</code> structure */
@@ -295,7 +316,15 @@ static inline void stm32_lock_acquire(LockingData_t *lock)
 {
   STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
   STM32_LOCK_ASSERT_VALID_NESTING_LEVEL(lock);
-  lock->basepri[lock->nesting_level++] = taskENTER_CRITICAL_FROM_ISR();
+  if (xPortIsInsideInterrupt() == pdFALSE)
+  {
+   taskENTER_CRITICAL();
+  }
+  else
+  {
+    lock->basepri[lock->nesting_level] = taskENTER_CRITICAL_FROM_ISR();
+    lock->nesting_level++;
+  }
 }
 
 /**
@@ -305,15 +334,22 @@ static inline void stm32_lock_acquire(LockingData_t *lock)
 static inline void stm32_lock_release(LockingData_t *lock)
 {
   STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
-  lock->nesting_level--;
-  STM32_LOCK_ASSERT_VALID_NESTING_LEVEL(lock);
-  taskEXIT_CRITICAL_FROM_ISR(lock->basepri[lock->nesting_level]);
+  if (xPortIsInsideInterrupt() == pdFALSE)
+  {
+    taskEXIT_CRITICAL();
+  }
+  else
+  {
+    lock->nesting_level--;
+    STM32_LOCK_ASSERT_VALID_NESTING_LEVEL(lock);
+    taskEXIT_CRITICAL_FROM_ISR(lock->basepri[lock->nesting_level]);
+  }
 }
 
 #undef STM32_LOCK_ASSERT_VALID_NESTING_LEVEL
 #undef STM32_LOCK_MAX_NESTED_LEVELS
 
-#elif STM32_THREAD_SAFE_STRATEGY == 5
+#elif defined(STM32_THREAD_SAFE_FREERTOS_DENY_LOCKS) && (STM32_THREAD_SAFE_FREERTOS_DENY_LOCKS != 0)
 /*
  * Deny lock usage from interrupts. Implemented using FreeRTOS locks.
  */
@@ -351,7 +387,9 @@ static inline void stm32_lock_acquire(LockingData_t *lock)
 {
   STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
   STM32_LOCK_BLOCK_IF_INTERRUPT_CONTEXT();
+#if configUSE_PREEMPTION == 1
   vTaskSuspendAll();
+#endif /* configUSE_PREEMPTION == 1 */
 }
 
 /**
@@ -362,12 +400,12 @@ static inline void stm32_lock_release(LockingData_t *lock)
 {
   STM32_LOCK_BLOCK_IF_NULL_ARGUMENT(lock);
   STM32_LOCK_BLOCK_IF_INTERRUPT_CONTEXT();
+#if configUSE_PREEMPTION == 1
   xTaskResumeAll();
+#endif /* configUSE_PREEMPTION == 1 */
 }
 
-#else
-#error Invalid STM32_THREAD_SAFE_STRATEGY specified
-#endif /* STM32_THREAD_SAFE_STRATEGY */
+#endif /* STM32_THREAD_SAFE_xx */
 
 #ifdef __cplusplus
 } /* extern "C" */

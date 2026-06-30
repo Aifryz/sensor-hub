@@ -6,7 +6,7 @@
 #include "stm32f4xx_hal_def.h"
 #include "stm32f4xx_hal_tim.h"
 #include "task.h"
-#include <log.hpp>
+#include <logging/log.hpp>
 #include <drivers/mcu/i2c.hpp>
 #include "stm32f4xx_hal_i2c.h"
 #include "tim.h"
@@ -18,7 +18,7 @@ namespace logging
     namespace impl
     {
         template<>
-		inline const char* log_var(log_stream& stream, const char* spec, HAL_StatusTypeDef var)
+		inline void log_var(log_stream& stream, const format_spec& spec, HAL_StatusTypeDef var)
 		{
             
             switch(var)
@@ -37,19 +37,7 @@ namespace logging
                     break;
                 default:
                     stream.write("UNKNOWN", 7);
-            }
-
-			const char* fmt_end = spec;
-			while (*fmt_end != '\0')
-			{
-				if(*fmt_end == '}' && *(fmt_end+1) != '}'){
-					fmt_end++;
-					break;
-				}
-				fmt_end++;
-			}
-			return fmt_end;
-            
+            }            
 		}
     }
 

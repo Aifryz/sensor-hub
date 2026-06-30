@@ -17,7 +17,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#include "log.hpp"
+#include "logging/log.hpp"
 #include <tasks/nrf_radio.hpp>
 #include <tasks/lcd_display.hpp>
 #include <tasks/io_expander.hpp>

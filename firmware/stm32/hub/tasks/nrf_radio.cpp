@@ -18,7 +18,7 @@
 #include <atomic>
 #include <array>
 #include <sensors/sensors_db.hpp>
-#include <log.hpp>
+#include <logging/log.hpp>
 
 struct nrf24_tag{};
 struct stm32_tag{};
@@ -509,8 +509,9 @@ void nrf_task([[maybe_unused]] void* arg)
 		if(pipe == 0)
 		{
 			auto data = nrf24_device.receive();
-			std::printf("Data: ID, %02X seq %02X tag %02x, data %d \r\n",
-				 data.node_id, data.seq, data.tag, data.data);
+			//std::printf("Data: ID, %02X seq %02X tag %02x, data %d \r\n",
+			//	 data.node_id, data.seq, data.tag, data.data);
+			logging::log("Data: ID, {02x} seq {02x} tag {02x}, data {} \r\n", data.node_id, data.seq, data.tag, data.data);
 			GetSensorDB().AddMeasurement(static_cast<SensorLocation>(data.node_id), static_cast<MeasurementType>(data.tag), data.data);
 
 			sys_led_pin::set();

@@ -170,6 +170,58 @@ TEST_CASE("log char", "[logging]")
     REQUIRE(std::string_view(reinterpret_cast<const char*>(data), len) == "temp=A");
 }
 
+TEST_CASE("log left", "[logging]")
+{
+    log_stream stream;
+
+    log(stream, "temp='{<5}'", 0, 4);
+
+    const auto [data, len] = stream.get_contiguous_data();
+
+    REQUIRE(data != nullptr);
+    //REQUIRE(len == 6);
+    REQUIRE(std::string_view(reinterpret_cast<const char*>(data), len) == "temp='4    '");
+}
+
+TEST_CASE("log right", "[logging]")
+{
+    log_stream stream;
+
+    log(stream, "temp='{>5}'", 0, 4);
+
+    const auto [data, len] = stream.get_contiguous_data();
+
+    REQUIRE(data != nullptr);
+    //REQUIRE(len == 6);
+    REQUIRE(std::string_view(reinterpret_cast<const char*>(data), len) == "temp='    4'");
+}
+
+TEST_CASE("log center", "[logging]")
+{
+    log_stream stream;
+
+    log(stream, "temp='{^5}'", 0, 4);
+
+    const auto [data, len] = stream.get_contiguous_data();
+
+    REQUIRE(data != nullptr);
+    //REQUIRE(len == 6);
+    REQUIRE(std::string_view(reinterpret_cast<const char*>(data), len) == "temp='  4  '");
+}
+
+TEST_CASE("log hex", "[logging]")
+{
+    log_stream stream;
+
+    log(stream, "temp='{02x}'", 0, 0xA5);
+
+    const auto [data, len] = stream.get_contiguous_data();
+
+    REQUIRE(data != nullptr);
+    //REQUIRE(len == 6);
+    REQUIRE(std::string_view(reinterpret_cast<const char*>(data), len) == "temp='a5'");
+}
+
 TEST_CASE("parse format", "[logging]")
 {
     logging::impl::format_spec spec = logging::impl::format_spec::parse("_< 10.2d");

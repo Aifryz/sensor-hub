@@ -9,7 +9,7 @@
 #include "table_screen.hpp"
 
 #include <lvgl.h>
-#include <log.hpp>
+#include <logging/log.hpp>
 #include <drivers/mcu/spi.hpp>
 #include <bsp/board_gpio.hpp>
 #include <bsp/board_config.hpp>

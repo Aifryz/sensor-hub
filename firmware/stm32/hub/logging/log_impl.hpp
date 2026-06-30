@@ -101,10 +101,65 @@ namespace impl
         template<class T> requires std::integral<T>
         inline void log_var(log_stream& stream, const format_spec& spec, T var)
         {
-            char buf[16];
-            std::to_chars_result x = std::to_chars(buf, buf+16, var);
+            char buf[32];
+            int base = 10;
+            if(spec.type == 'x' || spec.type == 'X')
+                base = 16;
+            if(spec.type == 'b' || spec.type == 'B')
+                base = 2;
+            if(spec.type == 'o' )
+                base = 8;
+            std::to_chars_result x = std::to_chars(buf, buf+16, var, base);
             int n = x.ptr-buf;
+
+            int lpad = 0;
+            int rpad = 0;
+
+            if(spec.align == format_spec::alignment_type::left)
+            {
+                rpad = spec.width-n;
+            }
+            else if(spec.align == format_spec::alignment_type::right || spec.align == format_spec::alignment_type::none)
+            {
+                lpad = spec.width-n;
+            }
+            else if(spec.align == format_spec::alignment_type::center)
+            {
+                lpad = (spec.width-n)/2;
+                rpad = spec.width-n-lpad;
+            }
+
+            char fill_char = spec.fill;
+            // todo fix
+            if(spec.zero_pad)
+            {
+                fill_char = '0';
+            }
+
+            constexpr size_t max_pad = 16;
+            char pad_buf[max_pad];
+            lpad = std::min(lpad, static_cast<int>(max_pad));
+            rpad = std::min(rpad, static_cast<int>(max_pad));
+            if(lpad > 0)
+            {
+                for(int i =0; i< lpad; i++)
+                {
+                    pad_buf[i] = fill_char;
+                }
+                stream.write(pad_buf, lpad);
+            }
+
             stream.write(buf, n);
+
+            if(rpad > 0)
+            {
+                for(int i =0; i< rpad; i++)
+                {
+                    pad_buf[i] = fill_char;
+                }
+                stream.write(pad_buf, rpad);
+            }
+            
         }
 
         template<>
@@ -120,6 +175,7 @@ namespace impl
             stream.write(buf, 1);
         }
 
+        /*
         template<>
         inline void log_var(log_stream& stream, const format_spec& spec, uint32_t var)
         {
@@ -139,6 +195,7 @@ namespace impl
 
             stream.write(buf, n);
 		}
+        */
 
 		inline void log(log_stream& stream, const char* spec, size_t off)
 		{
@@ -169,7 +226,7 @@ namespace impl
 			//Found { or NUL, log preceding
             stream.write(fmt+beg, part_end);
 			//Format the data
-            auto spec = format_spec::parse(std::string_view(format_start, format_end-format_start));
+            auto spec = format_spec::parse(std::string_view(format_start+1, format_end-format_start-1));
 			log_var(stream, spec, arg);
 			//Format rest
 			log(stream, format_end+1, off, args...);
